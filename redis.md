@@ -184,13 +184,15 @@ $redis->linsert('list2', 'after','ab1','456');&nbsp;&nbsp; //表示在元素'ab1
 $redis->blpop('list3',10); //如果list3为空则一直等待,直到不为空时将第一元素弹出,10秒后超时；<br>
 
 ####Redis Set集合
+
+
 //sadd 增加元素,返回true,重复返回false<br>
 $redis->sadd('set1','ab');<br>
 $redis->sadd('set1','cd');<br>
 $redis->sadd('set1','ef');<br>
 
 //srem 移除指定元素<br>
-$redis->srem('set1','cd'); //删除'cd'元素<br>
+$redis->srem('set1','cd'); //删除'cd'元素<br> <br>
 
 //spop 弹出首元素
 $redis->spop('set1');<br>
@@ -219,3 +221,57 @@ $redis->sinterstore('foo',array('set1','set2')); //将'set1'和'set2'中相同�
 
 //srandmember 返回表中一个随机元素<br>
 $redis->srandmember('set1');<br>
+
+
+####Redis Zset集合
+
+//sadd 增加元素,并设置序号,返回true,重复返回false<br>
+$redis->zadd('zset1',1,'ab');<br>
+$redis->zadd('zset1',2,'cd');<br>
+$redis->zadd('zset1',3,'ef');<br>
+
+//zincrby 对指定元素索引值的增减,改变元素排列次序<br>
+$redis->zincrby('zset1',10,'ab');//返回11<br>
+
+//zrem 移除指定元素<br>
+$redis->zrem('zset1','ef'); //true or false<br>
+
+//zrange 按位置次序返回表中指定区间的元素<br>
+$redis->zrange('zset1',0,1); //返回位置0和1之间(两个)的元素<br>
+$redis->zrange('zset1',0,-1);//返回位置0和倒数第一个元素之间的元素(相当于所有元素)<br>
+
+//zrevrange 同上,返回表中指定区间的元素,按次序倒排<br>
+$redis->zrevrange('zset1',0,-1); //元素顺序和zrange相反<br>
+
+//zrangebyscore/zrevrangebyscore 按顺序/降序返回表中指定索引区间的元素<br>
+$redis->zadd('zset1',3,'ef');<br>
+$redis->zadd('zset1',5,'gh');<br>
+$redis->zrangebyscore('zset1',2,9); //返回索引值2-9之间的元素 array('ef','gh')<br>
+//参数形式
+$redis->zrangebyscore('zset1',2,9,'withscores'); //返回索引值2-9之间的元素并包含索引值 array(array('ef',3),array('gh',5))<br>
+$redis->zrangebyscore('zset1',2,9,array('withscores' =>true,'limit'=>array(1, 2))); //返回索引值2-9之间的元素,'withscores' =>true表示包含索引值; 'limit'=>array(1, 2),表示最多返回2条,结果为array(array('ef',3),array('gh',5))<br>
+
+//zunionstore/zinterstore 将多个表的并集/交集存入另一个表中<br>
+$redis->zunionstore('zset3',array('zset1','zset2','zset0')); //将'zset1','zset2','zset0'的并集存入'zset3'<br>
+//其它参数
+$redis->zunionstore('zset3',array('zset1','zset2'),array('weights' => array(5,0)));//weights参数表示权重，其中表示并集后值大于5的元素排在前，大于0的排在后<br>
+$redis->zunionstore('zset3',array('zset1','zset2'),array('aggregate' => 'max'));//'aggregate' => 'max'或'min'表示并集后相同的元素是取大值或是取小值<br>
+
+//zcount 统计一个索引区间的元素个数<br>
+$redis->zcount('zset1',3,5);//2<br>
+$redis->zcount('zset1','(3',5)); //'(3'表示索引值在3-5之间但不含3,同理也可以使用'(5'表示上限为5但不含5<br>
+
+//zcard 统计元素个数<br>
+$redis->zcard('zset1');//4<br>
+
+//zscore 查询元素的索引<br>
+$redis->zscore('zset1','ef');//3<br>
+
+//zremrangebyscore 删除一个索引区间的元素<br>
+$redis->zremrangebyscore('zset1',0,2); //删除索引在0-2之间的元素('ab','cd'),返回删除元素个数2<br>
+
+//zrank/zrevrank 返回元素所在表顺序/降序的位置(不是索引)<br>
+$redis->zrank('zset1','ef');//返回0,因为它是第一个元素;zrevrank则返回1(最后一个)<br>
+
+//zremrangebyrank 删除表中指定位置区间的元素<br>
+$redis->zremrangebyrank('zset1',0,10); //删除位置为0-10的元素,返回删除的元素个数2<br>
