@@ -45,3 +45,13 @@ $current_value = $memcache->increment('money'，3);//money 加上3 <br>
 $new_value = $memcache_obj->decrement('test_item');//money 减去 1 <br>
 $new_value = $memcache_obj->decrement('test_item', 3);//money 减去 3 <br>
 
+
+#### 替换已经存在的元素的值
+$memcache->replace("key", "new value", false, 30);<br>
+
+
+#### 从服务端删除一个元素
+
+$memcache->delete('key_delete', 10);<br>
+
+10 删除该元素的执行时间。如果值为0,则该元素立即删除，如果值为30,元素会在30秒内被删除。<br>
