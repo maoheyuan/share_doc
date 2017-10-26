@@ -98,3 +98,41 @@ $redis->expire('foo'); //取消expire行为<br>
 //dbsize 返回redis当前数据库的记录总数<br>
 $redis->dbsize();<br>
 
+
+#### Redis Hash表
+
+//hset/hget 存取hash表的数据<br>
+$redis->hset('hash1','key1','v1'); //将key为'key1' value为'v1'的元素存入hash1表<br>
+$redis->hset('hash1','key2','v2');<br>
+$redis->hget('hash1','key1');//取出表'hash1'中的key 'key1'的值,返回'v1'<br>
+
+//hexists 返回hash表中的指定key是否存在<br>
+$redis->hexists ('hash1','key1'); //true or false
+
+//hdel 删除hash表中指定key的元素<br>
+$redis->hdel('hash1','key2'); //true or false <br>
+
+//hlen 返回hash表元素个数<br>
+$redis->hlen('hash1'); //1 <br>
+
+//hsetnx 增加一个元素,但不能重复
+$redis->hsetnx('hash1','key1','v2'); //false <br>
+$redis->hsetnx('hash1','key2','v2'); //true <br>
+
+//hmset/hmget 存取多个元素到hash表 <br>
+$redis->hmset('hash1',array('key3'=>'v3','key4'=>'v4')); <br>
+$redis->hmget('hash1',array('key3','key4')); //返回相应的值 array('v3','v4') <br>
+
+//hincrby 对指定key进行累加 <br>
+$redis->hincrby('hash1','key5',3); //返回3 <br>
+$redis->hincrby('hash1','key5',10); //返回13 <br>
+
+//hkeys 返回hash表中的所有key <br>
+$redis->hkeys('hash1'); //返回array('key1','key2','key3','key4','key5')
+
+//hvals 返回hash表中的所有value <br>
+$redis->hvals('hash1'); //返回array('v1','v2','v3','v4',13) <br>
+
+//hgetall 返回整个hash表元素 <br>
+$redis->hgetall('hash1'); //返回array('key1'=>'v1','key2'=>'v2','key3'=>'v3','key4'=>'v4','key5'=>13) <br>
+
