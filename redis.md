@@ -183,3 +183,39 @@ $redis->linsert('list2', 'after','ab1','456');&nbsp;&nbsp; //表示在元素'ab1
 //brpoplpush 同样是阻塞并等待操作，结果同rpoplpush一样
 $redis->blpop('list3',10); //如果list3为空则一直等待,直到不为空时将第一元素弹出,10秒后超时；<br>
 
+####Redis Set集合
+//sadd 增加元素,返回true,重复返回false<br>
+$redis->sadd('set1','ab');<br>
+$redis->sadd('set1','cd');<br>
+$redis->sadd('set1','ef');<br>
+
+//srem 移除指定元素<br>
+$redis->srem('set1','cd'); //删除'cd'元素<br>
+
+//spop 弹出首元素
+$redis->spop('set1');<br>
+
+//smove 移动当前set表的指定元素到另一个set表
+$redis->sadd('set2','123');<br>
+$redis->smove('set1','set2','ab');//移动'set1'中的'ab'到'set2',返回true or false<br>
+
+//scard 返回当前set表元素个数<br>
+$redis->scard('set2');//2<br>
+
+//sismember 判断元素是否属于当前表<br>
+$redis->sismember('set2','123'); //true or false<br>
+
+//smembers 返回当前表的所有元素<br>
+$redis->smembers('set2'); //array('123','ab');<br>
+
+//sinter/sunion/sdiff 返回两个表中元素的交集/并集/补集<br>
+$redis->sadd('set1','ab');<br>
+$redis->sinter('set2','set1'); //返回array('ab')<br>
+
+//sinterstore/sunionstore/sdiffstore 将两个表交集/并集/补集元素copy到第三个表中<br>
+$redis->set('foo',0);<br>
+$redis->sinterstore('foo','set1'); //这边等同于将'set1'的内容copy到'foo'中，并将'foo'转为set表<br>
+$redis->sinterstore('foo',array('set1','set2')); //将'set1'和'set2'中相同的元素copy到'foo'表中,覆盖'foo'原有内容<br>
+
+//srandmember 返回表中一个随机元素<br>
+$redis->srandmember('set1');<br>
