@@ -161,3 +161,40 @@ Array<br>
     bytes_read                读取的大小<br>
     bytes_written            写入大小<br>
     limit_maxbytes            服务器可用的最大内存.<br>
+
+
+
+####  运行时修改服务器参数和状态
+
+<?php<br>
+
+function _callback_memcache_failure($host, $port) {<br>
+    print "memcache '$host:$port' failed";<br>
+}<br>
+$memcache = new Memcache;<br>
+// 增加一台离线服务器<br>
+$memcache->addServer('memcache_host', 11211, false, 1, 1, -1, false);<br>
+// 使该服务器变为在线状态<br>
+$memcache->setServerParams('memcache_host', 11211, 1, 15, true, '_callback_memcache_failure');<br>
+
+?><br>
+
+
+
+
+####  开启大值自动压缩
+
+$memcache_obj = new Memcache;<br>
+$memcache_obj->addServer('memcache_host', 11211);<br>
+$memcache_obj->setCompressThreshold(20000, 0.2);<br>
+
+
+20000<br>
+控制多大值进行自动压缩的阈值。<br>
+
+0.2<br>
+指定经过压缩实际存储的值的压缩率，支持的值必须在0和1之间。默认值是0.2表示20%压缩率。<br>
+
+
+
+总结，memcache 的命令不多，大多数可以记得了，如果记不了的可以查看一下手册，关键在其基础上设计出一套完整的合理的缓存方案，才能使系统的架构更合理，能承受更大的负载...
