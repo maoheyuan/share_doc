@@ -39,9 +39,9 @@ get方法可以接收一个字符串或一个数组<br>
 
 
 #### 给定一个key加减 上1或加减上指定的数值
-$current_value = $memcache->increment('money');//money 加上1
-$current_value = $memcache->increment('money'，3);//money 加上3
+$current_value = $memcache->increment('money');//money 加上1 <br>
+$current_value = $memcache->increment('money'，3);//money 加上3 <br>
 
-$new_value = $memcache_obj->decrement('test_item');//money 减去 1
-$new_value = $memcache_obj->decrement('test_item', 3);//money 减去 3
+$new_value = $memcache_obj->decrement('test_item');//money 减去 1 <br>
+$new_value = $memcache_obj->decrement('test_item', 3);//money 减去 3 <br>
 
