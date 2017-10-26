@@ -74,7 +74,7 @@ $memcache->>getServerStatus('127.0.0.1', 11211);;<br>
 返回一个服务器的状态，0表示服务器离线，非0表示在线。<br>
 
 
-####  获取服务器统计信息
+####  获取服务器统计信息【单个】
 
 $memcache->>getStats('127.0.0.1', 11211);;<br>
 返回关联数组表示的服务器统计信息 或者在失败时返回 FALSE。<br>
@@ -98,3 +98,66 @@ get_misses                没有命中的次数<br>
 bytes_read                读取的大小<br>
 bytes_written            写入大小<br>
 limit_maxbytes            服务器可用的最大内存.<br>
+
+
+
+
+####  缓存服务器池中所有服务器统计信息【多个】
+
+$memcache_obj = new Memcache;
+$memcache_obj->addServer('127.0.0.1', 11211);
+$memcache_obj->addServer('192.168.1.149', 11211);
+
+
+$stats = $memcache_obj->getExtendedStats();
+print_r($stats);
+返回一个二维关联数组的服务器统计信息或者在失败时返回FALSE。<br>
+
+
+Array<br>
+(<br>
+    [127.0.0.1:11211] => Array<br>
+        (
+            [pid] => 3756<br>
+            [uptime] => 603011<br>
+            [time] => 1133810435<br>
+            [version] => 1.1.12
+            [rusage_user] => 0.451931<br>
+            [rusage_system] => 0.634903<br>
+            [curr_items] => 2483<br>
+            [total_items] => 3079<br>
+            [bytes] => 2718136<br>
+            [curr_connections] => 2<br>
+            [total_connections] => 807<br>
+            [connection_structures] => 13<br>
+            [cmd_get] => 9748<br>
+            [cmd_set] => 3096<br>
+            [get_hits] => 5976<br>
+            [get_misses] => 3772<br>
+            [bytes_read] => 3448968<br>
+            [bytes_written] => 2318883<br>
+            [limit_maxbytes] => 33554432<br>
+        )<br>
+
+    [192.168.1.149:11211] => false<br>
+)<br>
+
+    pid                       进程号<br>
+    uptime                    服务器运行时间<br>
+    time                    当前时间<br>
+    version                    版本号<br>
+    rusage_user                平均时间<br>
+    rusage_system            Accumulated system time for this process<br>
+    curr_items                Current number of items stored by the server<br>
+    total_items                Total number of items stored by this server ever since it started<br>
+    bytes                    当前用了多少内存<br>
+    curr_connections        当前的边接数<br>
+    total_connections        开始时多少连接<br>
+    connection_structures    最大允许的连接<br>
+    cmd_get                    get的总次数<br>
+    cmd_set                    set 的次数<br>
+    get_hits                命中的次数<br>
+    get_misses                没有命中的次数<br>
+    bytes_read                读取的大小<br>
+    bytes_written            写入大小<br>
+    limit_maxbytes            服务器可用的最大内存.<br>
