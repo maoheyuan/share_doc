@@ -11,7 +11,7 @@ Memcached简洁而强大。它的简洁设计便于快速开发，减轻开发�
 
 ### memcache的常用命令
 
-####连接服务器<br>
+#### 连接服务器<br>
 $memcache = new Memcache;<br>
 $memcache->addServer('127.0.0.1', 11211);<br>
 $memcache->addServer('192.168.1.149', 11211);<br>
