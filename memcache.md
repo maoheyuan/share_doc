@@ -55,3 +55,46 @@ $memcache->replace("key", "new value", false, 30);<br>
 $memcache->delete('key_delete', 10);<br>
 
 10 删除该元素的执行时间。如果值为0,则该元素立即删除，如果值为30,元素会在30秒内被删除。<br>
+
+
+
+#### 清洗（删除）已经存储的所有的元素
+
+$memcache->flush();<br>
+
+
+#### 返回服务器版本信息
+
+$memcache->getVersion() ;<br>
+
+
+#### 用于获取一个服务器的在线/离线状态
+
+$memcache->>getServerStatus('127.0.0.1', 11211);;<br>
+返回一个服务器的状态，0表示服务器离线，非0表示在线。<br>
+
+
+####  获取服务器统计信息
+
+$memcache->>getStats('127.0.0.1', 11211);;<br>
+返回关联数组表示的服务器统计信息 或者在失败时返回 FALSE。<br>
+
+pid                       进程号<br>
+uptime                    服务器运行时间<br>
+time                    当前时间<br>
+version                    版本号<br>
+rusage_user                平均时间<br>
+rusage_system            Accumulated system time for this process<br>
+curr_items                Current number of items stored by the server<br>
+total_items                Total number of items stored by this server ever since it started<br>
+bytes                    当前用了多少内存<br>
+curr_connections        当前的边接数<br>
+total_connections        开始时多少连接<br>
+connection_structures    最大允许的连接<br>
+cmd_get                    get的总次数<br>
+cmd_set                    set 的次数<br>
+get_hits                命中的次数<br>
+get_misses                没有命中的次数<br>
+bytes_read                读取的大小<br>
+bytes_written            写入大小<br>
+limit_maxbytes            服务器可用的最大内存.<br>
