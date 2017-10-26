@@ -30,3 +30,18 @@ $memcache->close();<br>
 $memcache->add('key', 'value', false, 30);<br>
 $memcache->set('key', 'value', false, 50);<br>
 add 与set的区别在于如果原来就有key时 add不会新增 但是set 会覆盖原来的值，都不存在时都会新增<br>
+
+
+#### 从服务端检回一个元素
+$memcache->get('key');<br>
+$memcache->set(array('key1', 'key2'));<br>
+get方法可以接收一个字符串或一个数组<br>
+
+
+#### 给定一个key加减 上1或加减上指定的数值
+$current_value = $memcache->increment('money');//money 加上1
+$current_value = $memcache->increment('money'，3);//money 加上3
+
+$new_value = $memcache_obj->decrement('test_item');//money 减去 1
+$new_value = $memcache_obj->decrement('test_item', 3);//money 减去 3
+
