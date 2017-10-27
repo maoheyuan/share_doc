@@ -2,31 +2,31 @@
 
 
 
-####﻿﻿1、将文件checkout到本地目录 
+###1、将文件checkout到本地目录
  
   svn checkout path（path是服务器上的目录） <br>
    例如：svn checkout svn://192.168.1.1/pro/domain  <br>
    简写：svn co  <br>
 
-####2、往版本库中添加新的文件 
+###2、往版本库中添加新的文件
  
   svn add file  <br>
   例如：svn add test.php(添加test.php)  <br>
   svn add *.php(添加当前目录下所有的php文件)  <br>
 
-####3、将改动的文件提交到版本库 
+###3、将改动的文件提交到版本库
  
   svn commit */file -m "LogMessage" [-N] [--no-unlock] PATH(如果选择了保持锁，就使用--no-unlock开关)  <br>
    例如：svn commit * -m "add test file for my test" test.php  <br>
    简写：svn ci  <br>
 
-####4、加锁/解锁 
+###4、加锁/解锁
  
   svn lock -m "LockMessage" [--force] PATH  <br>
   例如：svn lock -m "lock test file" test.php  <br>
   svn unlock PATH  <br>
 
-####5、更新到某个版本 
+###5、更新到某个版本
  
   svn update -r m path  <br>
    例如：  <br>
@@ -35,7 +35,7 @@
    svn update test.php(更新，于版本库同步。如果在提交的时候提示过期的话，是因为冲突，需要先update，修改文件，然后清除svn resolved，最后再提交commit) <br>
    简写：svn up  <br>
 
-####6、查看文件或者目录状态 
+###6、查看文件或者目录状态
  
   1）svn status path（目录下的文件和子目录的状态，正常状态不显示）  <br>
    【?：不在svn的控制中；M：内容被修改；C：发生冲突；A：预定加入到版本库；K：被锁定】  <br>
@@ -44,23 +44,23 @@
    注：svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。 <br>
    简写：svn st  <br>
  
-####7、删除文件 
+###7、删除文件
  
   svn delete path -m "delete test fle"   <br>
   例如：svn delete svn://192.168.1.1/pro/domain/test.php -m "delete test file"  <br>
   或者直接svn delete test.php 然后再svn ci -m 'delete test file‘，推荐使用这种  <br>
   简写：svn (del, remove, rm)  <br>
  
-####8、查看日志 
+###8、查看日志
  
   svn log path  <br>
   例如：svn log test.php 显示这个文件的所有修改记录，及其版本号的变化  <br>
 
-####9、查看文件详细信息 
+###9、查看文件详细信息
  
   svn info path  <br>
   例如：svn info test.php  <br>
-####10、比较差异 
+###10、比较差异
  
   svn diff path(将修改的文件与基础版本比较)  <br>
   例如：svn diff test.php  <br>
@@ -68,12 +68,12 @@
   例如：svn diff -r 200:201 test.php  <br>
   简写：svn di  <br>
 
-####11、将两个版本之间的差异合并到当前文件 
+###11、将两个版本之间的差异合并到当前文件
  
   svn merge -r m:n path  <br>
   例如：svn merge -r 200:205 test.php（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）  <br>
     
-####12、SVN 帮助 
+###12、SVN 帮助
  
   svn help  <br>
   svn help ci  <br>
@@ -84,26 +84,26 @@
  
 ------------------------------------------------------------------------------  <br>
  
-####13、版本库下的文件和目录列表 
+###13、版本库下的文件和目录列表
  
   svn list path  <br>
   显示path目录下的所有属于版本库的文件和目录  <br>
   简写：svn ls   <br>
 
-####14、创建纳入版本控制下的新目录  <br>
+###14、创建纳入版本控制下的新目录  <br>
  
   svn mkdir: 创建纳入版本控制下的新目录。  <br>
   用法: 1、mkdir PATH...  <br>
        2、mkdir URL...  <br>
  
-####15、恢复本地修改 
+###15、恢复本地修改
  
    svn revert: 恢复原始未改变的工作副本文件 (恢复大部份的本地修改)。revert:  <br>
    用法: revert PATH...  <br>
    注意: 本子命令不会存取网络，并且会解除冲突的状况。但是它不会恢复  <br>
         被删除的目录  <br>
   
-####16、代码库URL变更 
+###16、代码库URL变更
  
     svn switch (sw): 更新工作副本至不同的URL。  <br>
     用法: 1、switch URL [PATH]  <br>
@@ -116,14 +116,14 @@
              (比如方案名或是主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用  <br>
              这个命令更新工作副本与仓库的对应关系。  <br>
   
-####17、解决冲突 
+###17、解决冲突
  
    svn resolved: 移除工作副本的目录或文件的“冲突”状态。 <br> 
    用法: resolved PATH...  <br>
    注意: 本子命令不会依语法来解决冲突或是移除冲突标记；它只是移除冲突的  <br>
    相关文件，然后让 PATH 可以再次提交。  <br>
   
-####18、输出指定文件或URL的内容。 
+###18、输出指定文件或URL的内容。
  
   svn cat 目标[@版本]...如果指定了版本，将从指定的版本开始查找。  <br>
   svn cat -r PREV filename > filename (PREV 是上一版本,也可以写具体版本号,这样输出结果是可以提交的) <br>
