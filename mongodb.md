@@ -554,3 +554,121 @@ Select * from test where likes>100 AND  likes<200;<br>
 输出结果：<br>
 > db.test.find({likes : {$lt :200, $gt : 100}})<br>
 { "_id" : ObjectId("56066549ade2f21f36b0313b"), "title" : "Java 教程", "description" : "Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。", "by" : "教程", "tags" : [ "java" ], "likes" : 150 }<br>
+
+
+
+
+MongoDB $type 操作符<br>
+$type操作符是基于BSON类型来检索集合中匹配的数据类型，并返回结果。<br>
+MongoDB 中可以使用的类型如下表所示：<br>
+我们使用的数据库名称为"test" 我们的集合名称为"test"，以下为我们插入的数据。<br>
+简单的集合"test"：<br>
+>db.test.insert({<br>
+    title: 'PHP 教程',<br>
+    description: 'PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。',<br>
+    by: '教程',<br>
+    tags: ['php'],<br>
+    likes: 200<br>
+})<br>
+>db.col.insert({title: 'Java 教程',<br>
+    description: 'Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。',<br>
+    by: '教程',<br>
+<br>
+    tags: ['java'],<br>
+    likes: 150<br>
+})<br>
+>db.col.insert({title: 'MongoDB 教程',<br>
+    description: 'MongoDB 是一个 Nosql 数据库',<br>
+    by: '教程',<br>
+<br>
+    tags: ['mongodb'],<br>
+    likes: 100<br>
+})<br>
+使用find()命令查看数据：<br>
+> db.col.find()<br>
+{ "_id" : ObjectId("56066542ade2f21f36b0313a"), "title" : "PHP 教程", "description" : "PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。", "by" : "教程",  "tags" : [ "php" ], "likes" : 200 }<br>
+{ "_id" : ObjectId("56066549ade2f21f36b0313b"), "title" : "Java 教程", "description" : "Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。", "by" : "教程",  "tags" : [ "java" ], "likes" : 150 }<br>
+{ "_id" : ObjectId("5606654fade2f21f36b0313c"), "title" : "MongoDB 教程", "description" : "MongoDB 是一个 Nosql 数据库", "by" : "教程",  "tags" : [ "mongodb" ], "likes" : 100 }<br>
+MongoDB 操作符 - $type 实例<br>
+如果想获取 "col" 集合中 title 为 String 的数据，你可以使用以下命令：<br>
+db.col.find({"title" : {$type : 2}})<br>
+输出结果为：<br>
+{ "_id" : ObjectId("56066542ade2f21f36b0313a"), "title" : "PHP 教程", "description" : "PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。", "by" : "教程",  "tags" : [ "php" ], "likes" : 200 }<br>
+{ "_id" : ObjectId("56066549ade2f21f36b0313b"), "title" : "Java 教程", "description" : "Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。", "by" : "教程","tags" : [ "java" ], "likes" : 150 }<br>
+{ "_id" : ObjectId("5606654fade2f21f36b0313c"), "title" : "MongoDB 教程", "description" : "MongoDB 是一个 Nosql 数据库", "by" : "教程", "tags" : [ "mongodb" ], "likes" : 100 }<br>
+
+
+
+
+
+
+
+MongoDB Limit与Skip方法<br>
+如果你需要在MongoDB中读取指定数量的数据记录，可以使用MongoDB的Limit方法，limit()方法接受一个数字参数，该参数指定从MongoDB中读取的记录条数。<br>
+语法<br>
+limit()方法基本语法如下所示：<br>
+>db.COLLECTION_NAME.find().limit(NUMBER)<br>
+实例<br>
+集合 test 中的数据如下：<br>
+{ "_id" : ObjectId("56066542ade2f21f36b0313a"), "title" : "PHP 教程", "description" : "PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。", "by" : "教程", "tags" : [ "php" ], "likes" : 200 }<br>
+{ "_id" : ObjectId("56066549ade2f21f36b0313b"), "title" : "Java 教程", "description" : "Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。", "by" : "教程",  "tags" : [ "java" ], "likes" : 150 }<br>
+{ "_id" : ObjectId("5606654fade2f21f36b0313c"), "title" : "MongoDB 教程", "description" : "MongoDB 是一个 Nosql 数据库", "by" : "教程",  "tags" : [ "mongodb" ], "likes" : 100 }<br>
+以上实例为显示查询文档中的两条记录：<br>
+> db.test.find({},{"title":1,_id:0}).limit(2)<br>
+{ "title" : "PHP 教程" }<br>
+{ "title" : "Java 教程" }<br>
+><br>
+注：如果你们没有指定limit()方法中的参数则显示集合中的所有数据。<br>
+MongoDB Skip() 方法<br>
+我们除了可以使用limit()方法来读取指定数量的数据外，还可以使用skip()方法来跳过指定数量的数据，skip方法同样接受一个数字参数作为跳过的记录条数。<br>
+语法<br>
+skip() 方法脚本语法格式如下：<br>
+>db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER)<br>
+实例<br>
+以上实例只会显示第二条文档数据<br>
+>db.test.find({},{"title":1,_id:0}).limit(1).skip(1)<br>
+{ "title" : "Java 教程" }<br>
+><br>
+注:skip()方法默认参数为 0 。<br>
+
+
+
+
+
+MongoDB 排序<br>
+MongoDB sort()方法<br>
+在MongoDB中使用使用sort()方法对数据进行排序，sort()方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式，其中 1 为升序排列，而-1是用于降序排列。<br>
+语法<br>
+sort()方法基本语法如下所示：<br>
+>db.COLLECTION_NAME.find().sort({KEY:1})<br>
+实例<br>
+col 集合中的数据如下：<br>
+{ "_id" : ObjectId("56066542ade2f21f36b0313a"), "title" : "PHP 教程", "description" : "PHP 是一种创建动态交互性站点的强有力的服务器端脚本语言。", "by" : "教程","tags" : [ "php" ], "likes" : 200 }<br>
+{ "_id" : ObjectId("56066549ade2f21f36b0313b"), "title" : "Java 教程", "description" : "Java 是由Sun Microsystems公司于1995年5月推出的高级程序设计语言。", "by" : "教程","tags" : [ "java" ], "likes" : 150 }<br>
+{ "_id" : ObjectId("5606654fade2f21f36b0313c"), "title" : "MongoDB 教程", "description" : "MongoDB 是一个 Nosql 数据库", "by" : "教程",  "tags" : [ "mongodb" ], "likes" : 100 }<br>
+以下实例演示了 col 集合中的数据按字段 likes 的降序排列：<br>
+>db.col.find({},{"title":1,_id:0}).sort({"likes":-1})<br>
+{ "title" : "PHP 教程" }<br>
+{ "title" : "Java 教程" }<br>
+{ "title" : "MongoDB 教程" }<br>
+><br>
+
+
+
+
+MongoDB 索引<br>
+索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。<br>
+这种扫描全集合的查询效率是非常低的，特别在处理大量的数据时，查询可以要花费几十秒甚至几分钟，这对网站的性能是非常致命的。<br>
+索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库表中一列或多列的值进行排序的一种结构<br>
+ensureIndex() 方法<br>
+MongoDB使用 ensureIndex() 方法来创建索引。<br>
+语法<br>
+ensureIndex()方法基本语法格式如下所示：<br>
+>db.COLLECTION_NAME.ensureIndex({KEY:1})<br>
+语法中 Key 值为你要创建的索引字段，1为指定按升序创建索引，如果你想按降序来创建索引指定为-1即可。<br>
+实例<br>
+>db.test.ensureIndex({"title":1})<br>
+><br>
+ensureIndex() 方法中你也可以设置使用多个字段创建索引（关系型数据库中称作复合索引）。<br>
+>db.test.ensureIndex({"title":1,"description":-1})<br>
+><br>
