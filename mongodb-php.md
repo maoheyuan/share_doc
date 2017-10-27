@@ -62,3 +62,160 @@ $cursor  =  $collection -> find ();<br>
 foreach (  $cursor  as  $id  =>  $value  ) {<br>
     var_dump (  $value  );<br>
 }  <br>
+
+###学习练习
+
+
+//$connection=new MongoClient();<br>
+
+//$db=$connection->shop->users;<br>
+
+//批量添加文档: (只能循环一条一条加)<br>
+/*for($i=0;$i<100;$i++){<br>
+    $db->insert(array("id"=>$i,"username"=>$i,"addtime"=>time()));<br>
+}*/<br>
+
+
+//查找集合所有数据<br>
+/*$userList=$db->find();*/<br>
+
+//查找集合所有数据<br>
+/*$userList=$db->find();<br>
+//显示结果<br>
+foreach (  $userList  as  $id  =>  $value  ) {<br>
+   var_dump (  $value  );<br>
+}*/<br>
+
+
+//查找条件为username=1的<br>
+/*$userList=$db->find(array("username"=>1));<br>
+foreach($userList as $id=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+
+
+//查找条件为username=3的<br>
+/*$userInfo=$db->findOne(array("username"=>3));<br>
+var_dump($userInfo);*/<br>
+
+
+//清空一个表中的所有数据<br>
+/*var_dump($db->remove());*/<br>
+/*var_dump($db->remove());<br>
+for($i=0;$i<100;$i++){<br>
+    $username="username".$i;<br>
+    $db->insert(array("id"=>$i,"money"=>$i,"username"=>"$username","addtime"=>time()));<br>
+}*/<br>
+
+
+
+//查找所有的记录，不过只要money 与username 二个字段的数据<br>
+/*$userList=$db->find(array(),array("money"=>1,"username"=>1));<br>
+foreach($userList as $id=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+
+
+/*$userList=$db->find(array("money"=>99));<br>
+foreach($userList as $key=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+
+
+//查找money 大于90的所有数据<br>
+//$userList=$db->find(array("money" => array('$gt' => 90)));<br>
+/*$userList=$db->find(array("money"=>array('$gt'=>90)));<br>
+foreach($userList as $key=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+
+//查找money 大于1 且小于5 的所有数据<br>
+/*<br>
+$userList=$db->find(array("money"=>array('$gt'=>1,'$lt'=>5)));<br>
+<br>
+foreach($userList as $key=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+
+
+//查找money 在1 5 6 三个值的所有数据<br>
+/*$userList=$db->find(array("money"=>array('$in'=>array(1,5,6))));<br>
+foreach($userList as $key=>$value){<br>
+ var_dump($value);<br>
+}*/<br>
+
+//查找money 大于1 且小于5  且 值在2,3,4 的所有数据<br>
+/*$userList=$db->find(array("money"=>array('$gt'=>1,'$lt'=>10,'$nin'=>array(2,3,4))));<br>
+foreach ($userList as $key=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+
+
+//查找(money 等于2 或 等于5 或username 等于username3)  且 值在2 的所有数据<br>
+/*$userList=$db->find(<br>
+    array(<br>
+        "money"=>2,<br>
+        '$or'=>array(<br>
+            array("money"=>2),<br>
+            array("money"=>5),<br>
+            array("username"=>"username3")<br>
+        )<br>
+    )<br>
+);<br>
+foreach ($userList as $key=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+<br>
+//查找username like  %me1% 的所有数据<br>
+/*<br>
+$userList=$db->find(array("username"=>new MongoRegex("/me1/")));<br>
+foreach($userList as $key=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+/*<br>
+
+//查找 从 10开始的后10条数据<br>
+$userList=$db->find()->limit(10)->skip(10);<br>
+
+foreach($userList as $key=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+
+
+//查找 满足条件的数据数量<br>
+
+/*$userList=$db->find(array("money"=>array('$gt'=>50)))->count();<br>
+var_dump($userList);*/<br>
+
+
+//查找 一条记录<br>
+/*$userInfo=$db->findOne(array("money"=>1));<br>
+var_dump($userInfo);<br>
+// 更新money等于1的数据<br>
+$result=$db->update(array("money"=>1),array('$set'=>array("username"=>"sbs")));<br>
+var_dump($result);<br>
+$userInfo=$db->findOne(array("money"=>1));<br>
+var_dump($userInfo);*/<br>
+
+// 更新money等于1的数据清空原来的数据，更新后数据只要 a=1<br>
+/*$db->update(array("money"=>1), array("a" => 1));<br>
+
+$userInfo=$db->findOne( array("a" => 1));<br>
+var_dump($userInfo);*/<br>
+
+
+/*$result=$db->remove(array("money"=>array('$gt'=>10,'$lt'=>20)));<br>
+
+var_dump($result);*/<br>
+
+
+/*$userList=$db->find(array("money"=>array('$gt'=>10,'$lt'=>20)));<br>
+
+foreach($userList as $key=>$value){<br>
+    var_dump($value);<br>
+}*/<br>
+
+
+/*$userList=$db->find(array("money"=>array('$gt'=>10,'$lt'=>20)))->count();<br>
+var_dump($userList);*/<br>
+
