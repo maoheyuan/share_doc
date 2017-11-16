@@ -1,15 +1,15 @@
-#使用 PHP 和 Apache Solr 实现企业搜索
+# 使用 PHP 和 Apache Solr 实现企业搜索
 原文链接：http://www.ibm.com/developerworks/cn/opensource/os-php-apachesolr/
 
 　　　　   http://blog.csdn.net/hzcyclone/article/details/7006354
 
-###1、安装solr（下载地址：http://www.apache.org/dyn/closer.lua/lucene/solr/6.0.0）
+### 1、安装solr（下载地址：http://www.apache.org/dyn/closer.lua/lucene/solr/6.0.0）
 
-###2、安装php的solr扩展（下载地址：http://pecl.php.net/package/solr）
+### 2、安装php的solr扩展（下载地址：http://pecl.php.net/package/solr）
 
-###3、下载phpsolrclient代码（最健壮的实现是 Donovan Jimenez 的 PHP Solr Client，下载地址：http://code.google.com/p/solr-php-client/downloads/list）
+### 3、下载phpsolrclient代码（最健壮的实现是 Donovan Jimenez 的 PHP Solr Client，下载地址：http://code.google.com/p/solr-php-client/downloads/list）
 
-###4、使用代码示例：
+### 4、使用代码示例：
 
 复制代码<br>
 <?php<br>
