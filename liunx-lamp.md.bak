@@ -83,95 +83,95 @@ make: *** [all] Error 2 <br>
 #### 创建 mysql 用户和 mysql 用户组
 [root@VM_77_151_centos ~]# groupadd -r mysql && useradd -r -g mysql -s /bin/false -M mysql <br>
 #### 创建数据库存放目录，以及权限修改
-[root@VM_77_151_centos mysql]# mkdir -p /usr/local/mysql/data && chown -R root:mysql /usr/local/mysql/
-[root@VM_77_151_centos mysql]# chown -R mysql:mysql /usr/local/mysql/data/
-[root@VM_77_151_centos mysql]# chmod -R go-rwx /usr/local/mysql/data/
+[root@VM_77_151_centos mysql]# mkdir -p /usr/local/mysql/data && chown -R root:mysql /usr/local/mysql/ <br>
+[root@VM_77_151_centos mysql]# chown -R mysql:mysql /usr/local/mysql/data/ <br>
+[root@VM_77_151_centos mysql]# chmod -R go-rwx /usr/local/mysql/data/ <br>
 #### 初始化 MySQL 数据库
-[root@VM_77_151_centos bin]# /usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
+[root@VM_77_151_centos bin]# /usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data <br>
 #### 启动
-[root@VM_77_151_centos bin]# /usr/local/mysql/support-files/mysql.server start
-[root@VM_77_151_centos lib]# echo "/usr/local/mysql/lib" > /etc/ld.so.conf.d/mysql.conf
+[root@VM_77_151_centos bin]# /usr/local/mysql/support-files/mysql.server start <br>
+[root@VM_77_151_centos lib]# echo "/usr/local/mysql/lib" > /etc/ld.so.conf.d/mysql.conf <br>
+
+
 
 ### Apache
-
-
-[root@VM_77_151_centos ~]# wget http://mirror.bit.edu.cn/apache//httpd/httpd-2.4.25.tar.gz
-[root@VM_77_151_centos ~]# tar -zxvf httpd-2.4.25.tar.gz
+[root@VM_77_151_centos ~]# wget http://mirror.bit.edu.cn/apache//httpd/httpd-2.4.25.tar.gz <br>
+[root@VM_77_151_centos ~]# tar -zxvf httpd-2.4.25.tar.gz <br>
 #### 安装依赖 apr apr-util pcre
-[root@VM_77_151_centos ~]# wget http://archive.apache.org/dist/apr/apr-1.5.2.tar.gz
-[root@VM_77_151_centos ~]# wget http://archive.apache.org/dist/apr/apr-util-1.5.4.tar.gz
-[root@VM_77_151_centos ~]# tar -zxvf apr-1.5.2.tar.gz
-[root@VM_77_151_centos ~]# tar -zxvf apr-util-1.5.4.tar.gz
-[root@VM_77_151_centos ~]# mv apr-1.5.2 apr
-[root@VM_77_151_centos ~]# mv apr-util-1.5.4 apr-util
-[root@VM_77_151_centos ~]# mv apr apr-util httpd-2.4.25/srclib/
-[root@VM_77_151_centos ~]# wget https://fossies.org/linux/misc/pcre-8.39.tar.gz
-[root@VM_77_151_centos ~]# tar pcre-8.39.tar.gz
-[root@VM_77_151_centos ~]# cd pcre-8.39
-[root@VM_77_151_centos pcre-8.39]# ./configure --prefix=/usr/local/pcre-8.39
+[root@VM_77_151_centos ~]# wget http://archive.apache.org/dist/apr/apr-1.5.2.tar.gz <br>
+[root@VM_77_151_centos ~]# wget http://archive.apache.org/dist/apr/apr-util-1.5.4.tar.gz <br>
+[root@VM_77_151_centos ~]# tar -zxvf apr-1.5.2.tar.gz <br>
+[root@VM_77_151_centos ~]# tar -zxvf apr-util-1.5.4.tar.gz <br>
+[root@VM_77_151_centos ~]# mv apr-1.5.2 apr <br>
+[root@VM_77_151_centos ~]# mv apr-util-1.5.4 apr-util <br>
+[root@VM_77_151_centos ~]# mv apr apr-util httpd-2.4.25/srclib/ <br>
+[root@VM_77_151_centos ~]# wget https://fossies.org/linux/misc/pcre-8.39.tar.gz <br>
+[root@VM_77_151_centos ~]# tar pcre-8.39.tar.gz <br>
+[root@VM_77_151_centos ~]# cd pcre-8.39 <br>
+[root@VM_77_151_centos pcre-8.39]# ./configure --prefix=/usr/local/pcre-8.39 <br>
 #### 编译 安装
-[root@VM_77_151_centos ~]# cd ~./httpd-2.4.25
-[root@VM_77_151_centos httpd-2.4.25]# ./configure --prefix=/usr/local/apache -with-pcre=/usr/local/pcre-8.39/bin/pcre-config -with-included-apr
-[root@VM_77_151_centos httpd-2.4.25]# make
-[root@VM_77_151_centos httpd-2.4.25]# make install
-[root@VM_77_151_centos httpd-2.4.25]# cd /usr/local/apache/bin
-[root@VM_77_151_centos bin]# ./apachectl -k start
+[root@VM_77_151_centos ~]# cd ~./httpd-2.4.25 <br>
+[root@VM_77_151_centos httpd-2.4.25]# ./configure --prefix=/usr/local/apache -with-pcre=/usr/local/pcre-8.39/bin/pcre-config -with-included-apr <br>
+[root@VM_77_151_centos httpd-2.4.25]# make <br>
+[root@VM_77_151_centos httpd-2.4.25]# make install <br>
+[root@VM_77_151_centos httpd-2.4.25]# cd /usr/local/apache/bin <br>
+[root@VM_77_151_centos bin]# ./apachectl -k start <br>
 #### 防火墙启动80端口
-[root@VM_77_151_centos bin]# firewall-cmd --zone=public --add-port=80/tcp --permanent
-[root@VM_77_151_centos bin]# systemctl restart firewalld.service
+[root@VM_77_151_centos bin]# firewall-cmd --zone=public --add-port=80/tcp --permanent <br>
+[root@VM_77_151_centos bin]# systemctl restart firewalld.service <br>
 
 
 ### Nginx
 
 
-[root@VM_77_151_centos ~]# wget http://nginx.org/download/nginx-1.10.3.tar.gz
-[root@VM_77_151_centos ~]# tar -zxvf 1.10.3.tar.gz
-[root@VM_77_151_centos ~]#cd nginx-1.10.3/
-[root@VM_77_151_centos nginx-1.10.3]#  ./configure --prefix=/usr/local/nginx --with-pcre=../pcre-8.39
-[root@VM_77_151_centos nginx-1.10.3]# make
-[root@VM_77_151_centos nginx-1.10.3]# make install
-[root@VM_77_151_centos nginx-1.10.3]# cd /usr/local/nginx/
+[root@VM_77_151_centos ~]# wget http://nginx.org/download/nginx-1.10.3.tar.gz <br>
+[root@VM_77_151_centos ~]# tar -zxvf 1.10.3.tar.gz <br>
+[root@VM_77_151_centos ~]#cd nginx-1.10.3/ <br>
+[root@VM_77_151_centos nginx-1.10.3]#  ./configure --prefix=/usr/local/nginx --with-pcre=../pcre-8.39 <br>
+[root@VM_77_151_centos nginx-1.10.3]# make <br>
+[root@VM_77_151_centos nginx-1.10.3]# make install <br>
+[root@VM_77_151_centos nginx-1.10.3]# cd /usr/local/nginx/ <br>
 #### 启动 Nginx 前先将 Apache 的进程关闭
-[root@VM_77_151_centos nginx]# ./sbin/nginx
+[root@VM_77_151_centos nginx]# ./sbin/nginx <br>
 
 ### 配置PHP
 
 #### 拷贝默认配置
-[root@VM_77_151_centos sbin]# cd /usr/local/php7/etc/
-[root@VM_77_151_centos etc]# cp php-fpm.conf.default php-fpm.conf
-[root@VM_77_151_centos etc]# cd php-fpm.d
-[root@VM_77_151_centos php-fpm.d]# cp www.conf.default www.conf
+[root@VM_77_151_centos sbin]# cd /usr/local/php7/etc/ <br>
+[root@VM_77_151_centos etc]# cp php-fpm.conf.default php-fpm.conf <br>
+[root@VM_77_151_centos etc]# cd php-fpm.d <br>
+[root@VM_77_151_centos php-fpm.d]# cp www.conf.default www.conf <br>
 #### 启动 php-fpm
-[root@VM_77_151_centos php-fpm.d]# cd /usr/local/php7/sbin/
+[root@VM_77_151_centos php-fpm.d]# cd /usr/local/php7/sbin/ <br>
 
 
 ### 配置 Nginx 解析 .php 文件
 
 
-[root@VM_77_151_centos nginx]# vim conf/nginx.conf
-# 添加如下配置
-#http {
-#    server {
-#        location ~ \.php$ {
-#                fastcgi_pass   127.0.0.1:9000;
-#                fastcgi_index  index.php;
-#                include /usr/local/nginx/conf/fastcgi_params;
-#                #include fastcgi_params;
-#                fastcgi_split_path_info         ^(.+\.php)(/.+)$;
-#                fastcgi_param PATH_INFO         $fastcgi_path_info;
-#                fastcgi_param PATH_TRANSLATED   $document_root$fastcgi_path_info;
-#                fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;
-#       }
-#    }
-#}
+[root@VM_77_151_centos nginx]# vim conf/nginx.conf <br>
+# 添加如下配置 <br>
+#http {<br>
+#    server {<br>
+#        location ~ \.php$ {<br>
+#                fastcgi_pass   127.0.0.1:9000;<br>
+#                fastcgi_index  index.php;<br>
+#                include /usr/local/nginx/conf/fastcgi_params;<br>
+#                #include fastcgi_params;<br>
+#                fastcgi_split_path_info         ^(.+\.php)(/.+)$;<br>
+#                fastcgi_param PATH_INFO         $fastcgi_path_info;<br>
+#                fastcgi_param PATH_TRANSLATED   $document_root$fastcgi_path_info;<br>
+#                fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;<br>
+#       }<br>
+#    }<br>
+#}<br>
 # 重启 Nginx
 
 
-[root@VM_77_151_centos nginx]# sbin/nginx -s reload
+[root@VM_77_151_centos nginx]# sbin/nginx -s reload <br>
 
 
-参考
-初秋夏末 http://www.jianshu.com/p/571015904536
-swap分区：http://blog.csdn.net/tongyijia/article/details/50783083
-参考:http://www.imooc.com/learn/703
-https://typecodes.com/web/centos7compilemysql.html?utm_source=tuicool&utm_medium=referral
+参考 <br>
+初秋夏末 http://www.jianshu.com/p/571015904536 <br>
+swap分区：http://blog.csdn.net/tongyijia/article/details/50783083 <br>
+参考:http://www.imooc.com/learn/703 <br>
+https://typecodes.com/web/centos7compilemysql.html?utm_source=tuicool&utm_medium=referral <br>

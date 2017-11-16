@@ -166,9 +166,7 @@ make: *** [all] Error 2 <br>
 #}<br>
 # ÖØÆô Nginx
 
-
 [root@VM_77_151_centos nginx]# sbin/nginx -s reload <br>
-
 
 ²Î¿¼ <br>
 ³õÇïÏÄÄ© http://www.jianshu.com/p/571015904536 <br>
