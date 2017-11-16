@@ -151,20 +151,20 @@ make: *** [all] Error 2 <br>
 [root@VM_77_151_centos nginx]# vim conf/nginx.conf <br>
 # 添加如下配置 <br>
 #http {<br>
-#    server {<br>
-#        location ~ \.php$ {<br>
-#                fastcgi_pass   127.0.0.1:9000;<br>
-#                fastcgi_index  index.php;<br>
-#                include /usr/local/nginx/conf/fastcgi_params;<br>
-#                #include fastcgi_params;<br>
-#                fastcgi_split_path_info         ^(.+\.php)(/.+)$;<br>
-#                fastcgi_param PATH_INFO         $fastcgi_path_info;<br>
-#                fastcgi_param PATH_TRANSLATED   $document_root$fastcgi_path_info;<br>
-#                fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;<br>
-#       }<br>
-#    }<br>
+    #server {<br>
+        #location ~ \.php$ {<br>
+                #fastcgi_pass   127.0.0.1:9000;<br>
+                #fastcgi_index  index.php;<br>
+                #include /usr/local/nginx/conf/fastcgi_params;<br>
+                #include fastcgi_params;<br>
+                #fastcgi_split_path_info         ^(.+\.php)(/.+)$;<br>
+                #fastcgi_param PATH_INFO         $fastcgi_path_info;<br>
+                #fastcgi_param PATH_TRANSLATED   $document_root$fastcgi_path_info;<br>
+                #fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;<br>
+       #}<br>
+    #}<br>
 #}<br>
-# 重启 Nginx
+#### 重启 Nginx
 
 [root@VM_77_151_centos nginx]# sbin/nginx -s reload <br>
 

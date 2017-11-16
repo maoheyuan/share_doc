@@ -57,9 +57,9 @@ http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz<br>
 manually using curl/wget or a similar tool<br>
 
 ### # 在 cmake 后面加上（# 号去掉）
-#-DDOWNLOAD_BOOST=1 \
-#-DWITH_BOOST=/usr/share/doc/boost-doc-1.59.0/ 
-#-DOWNLOAD_BOOST_TIMEOUT=3600
+#-DDOWNLOAD_BOOST=1 \ <br>
+#-DWITH_BOOST=/usr/share/doc/boost-doc-1.59.0/  <br>
+#-DOWNLOAD_BOOST_TIMEOUT=3600 <br>
 
 #### 或者
 [root@VM_77_151_centos mysql-5.7.17]# wget http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz<br>
@@ -151,18 +151,18 @@ make: *** [all] Error 2 <br>
 [root@VM_77_151_centos nginx]# vim conf/nginx.conf <br>
 # 添加如下配置 <br>
 #http {<br>
-#    server {<br>
-#        location ~ \.php$ {<br>
-#                fastcgi_pass   127.0.0.1:9000;<br>
-#                fastcgi_index  index.php;<br>
-#                include /usr/local/nginx/conf/fastcgi_params;<br>
-#                #include fastcgi_params;<br>
-#                fastcgi_split_path_info         ^(.+\.php)(/.+)$;<br>
-#                fastcgi_param PATH_INFO         $fastcgi_path_info;<br>
-#                fastcgi_param PATH_TRANSLATED   $document_root$fastcgi_path_info;<br>
-#                fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;<br>
-#       }<br>
-#    }<br>
+    #server {<br>
+        #location ~ \.php$ {<br>
+                #fastcgi_pass   127.0.0.1:9000;<br>
+                #fastcgi_index  index.php;<br>
+                #include /usr/local/nginx/conf/fastcgi_params;<br>
+                #include fastcgi_params;<br>
+                #fastcgi_split_path_info         ^(.+\.php)(/.+)$;<br>
+                #fastcgi_param PATH_INFO         $fastcgi_path_info;<br>
+                #fastcgi_param PATH_TRANSLATED   $document_root$fastcgi_path_info;<br>
+                #fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;<br>
+       #}<br>
+    #}<br>
 #}<br>
 # 重启 Nginx
 
