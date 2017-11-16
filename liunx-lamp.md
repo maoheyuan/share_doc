@@ -26,28 +26,28 @@
 #### 安装依赖和工具
 [root@VM_77_151_centos ~]# yum install cmake gcc-c++ ncurses-devel perl-Data-Dump boost boost-doc boost-devel <br>
 [root@VM_77_151_centos ~]# cd cd mysql-5.7.17 <br>
-[root@VM_77_151_centos mysql-5.7.17]# cmake \<br>
--DCMAKE_INSTALL_PREFIX=/usr/local/mysql \<br>
--DMYSQL_DATADIR=/mydata/mysql/data \<br>
--DSYSCONFDIR=/etc \<br>
--DMYSQL_USER=mysql \<br>
--DWITH_MYISAM_STORAGE_ENGINE=1 \<br>
--DWITH_INNOBASE_STORAGE_ENGINE=1 \<br>
--DWITH_ARCHIVE_STORAGE_ENGINE=1 \<br>
--DWITH_MEMORY_STORAGE_ENGINE=1 \<br>
--DWITH_READLINE=1 \<br>
--DMYSQL_UNIX_ADDR=/var/run/mysql/mysql.sock  \<br>
--DMYSQL_TCP_PORT=3306 \<br>
--DENABLED_LOCAL_INFILE=1 \<br>
--DENABLED_DOWNLOADS=1 \<br>
--DWITH_PARTITION_STORAGE_ENGINE=1 \<br>
--DEXTRA_CHARSETS=all \<br>
--DDEFAULT_CHARSET=utf8 \<br>
--DDEFAULT_COLLATION=utf8_general_ci \<br>
--DWITH_DEBUG=0 \<br>
--DMYSQL_MAINTAINER_MODE=0 \<br>
--DWITH_SSL:STRING=bundled \<br>
--DWITH_ZLIB:STRING=bundled \<br>
+[root@VM_77_151_centos mysql-5.7.17]# cmake \  <br>
+-DCMAKE_INSTALL_PREFIX=/usr/local/mysql \  <br>
+-DMYSQL_DATADIR=/mydata/mysql/data \  <br>
+-DSYSCONFDIR=/etc \  <br>
+-DMYSQL_USER=mysql \  <br>
+-DWITH_MYISAM_STORAGE_ENGINE=1 \   <br>
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \  <br>
+-DWITH_ARCHIVE_STORAGE_ENGINE=1 \  <br>
+-DWITH_MEMORY_STORAGE_ENGINE=1 \  <br>
+-DWITH_READLINE=1 \  <br>
+-DMYSQL_UNIX_ADDR=/var/run/mysql/mysql.sock  \ <br>
+-DMYSQL_TCP_PORT=3306 \  <br>
+-DENABLED_LOCAL_INFILE=1 \  <br>
+-DENABLED_DOWNLOADS=1 \  <br>
+-DWITH_PARTITION_STORAGE_ENGINE=1 \ <br>
+-DEXTRA_CHARSETS=all \  <br>
+-DDEFAULT_CHARSET=utf8 \  <br>
+-DDEFAULT_COLLATION=utf8_general_ci \  <br>
+-DWITH_DEBUG=0 \ <br>
+-DMYSQL_MAINTAINER_MODE=0 \ <br>
+-DWITH_SSL:STRING=bundled \ <br>
+-DWITH_ZLIB:STRING=bundled \ <br>
 
 #### 如果出现报这个（boost）错误
 -- Download failed, error: <br>
@@ -56,10 +56,10 @@ You can try downloading<br>
 http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz<br>
 manually using curl/wget or a similar tool<br>
 
-#### 在 cmake 后面加上（# 号去掉）
-####-DDOWNLOAD_BOOST=1 \
-####-DWITH_BOOST=/usr/share/doc/boost-doc-1.59.0/ \
-####-DOWNLOAD_BOOST_TIMEOUT=3600
+### # 在 cmake 后面加上（# 号去掉）
+### #-DDOWNLOAD_BOOST=1 \
+### #-DWITH_BOOST=/usr/share/doc/boost-doc-1.59.0/ \
+### #-DOWNLOAD_BOOST_TIMEOUT=3600
 
 #### 或者
 [root@VM_77_151_centos mysql-5.7.17]# wget http://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz<br>
