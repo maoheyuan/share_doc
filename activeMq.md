@@ -18,7 +18,6 @@ make install<br>
 重启php<br>
 
 ### 2、生产者publisher.php（每秒发送一次当前时间）
-[php] view plain copy<br>
 <?php<br>
 $queue  = '/topic/phptest';<br>
 $msg    = 'bar';<br>
@@ -34,9 +33,7 @@ try {<br>
 } catch(StompException $e) {<br>
     die('Connection failed: ' . $e->getMessage());<br>
 }<br>
-
-### 3、消费者consumer.php
-[php] view plain copy<br>
+###3、消费者consumer.php
 <?php<br>
 $queue  = '/topic/phptest';<br>
 
@@ -60,4 +57,4 @@ try {<br>
     die('Connection failed: ' . $e->getMessage());<br>
 }<br>
 
-### 4、通过执行 php producer.php 和 php consumer.php来进行mq消息存取。
+###4、通过执行 php producer.php 和 php consumer.php来进行mq消息存取。
