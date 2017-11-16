@@ -36,82 +36,82 @@ Eshell V6.1  (abort with ^G)<br>
 
 #安装rabbitmq依赖文件,安装rabbitmq
 ## 安装rabbitmq依赖包
-yum install xmlto
+yum install xmlto<br>
 
 ## 安装rabbitmq服务端
-wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.7/rabbitmq-server-3.5.7.tar.gz
-tar zxvf rabbitmq-server-3.5.7.tar.gz
-cd rabbitmq-server-3.5.7/
-make
-make install TARGET_DIR=/usr/local/rabbitmq SBIN_DIR=/usr/local/rabbitmq/sbin MAN_DIR=/usr/local/rabbitmq/man DOC_INSTALL_DIR=/usr/local/rabbitmq/doc
+wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.7/rabbitmq-server-3.5.7.tar.gz<br>
+tar zxvf rabbitmq-server-3.5.7.tar.gz<br>
+cd rabbitmq-server-3.5.7/<br>
+make<br>
+make install TARGET_DIR=/usr/local/rabbitmq SBIN_DIR=/usr/local/rabbitmq/sbin MAN_DIR=/usr/local/rabbitmq/man DOC_INSTALL_DIR=/usr/local/rabbitmq/doc<br>
 
 ## 配置hosts
-vim /etc/hosts
+vim /etc/hosts<br>
 ## 增加一行内容
 ## 当前IP地址   绑定HOSTNAME名称(vim /etc/sysconfig/network)
-192.168.2.208 localhost.localdomain
+192.168.2.208 localhost.localdomain<br>
 
 ## 这种会提示错误(Warning: PID file not written; -detached was passed.)
-/usr/local/rabbitmq/sbin/rabbitmq-server -detached 启动rabbitmq
-/usr/local/rabbitmq/sbin/rabbitmqctl status 查看状态
-/usr/local/rabbitmq/sbin/rabbitmqctl stop 关闭rabbitmq
+/usr/local/rabbitmq/sbin/rabbitmq-server -detached 启动rabbitmq<br>
+/usr/local/rabbitmq/sbin/rabbitmqctl status 查看状态<br>
+/usr/local/rabbitmq/sbin/rabbitmqctl stop 关闭rabbitmq<br>
 
 ## 目前我自己使用
-/usr/local/rabbitmq/sbin/rabbitmq-server start & 启动rabbitmq
-/usr/local/rabbitmq/sbin/rabbitmqctl status 查看状态
-/usr/local/rabbitmq/sbin/rabbitmqctl stop 关闭rabbitmq
+/usr/local/rabbitmq/sbin/rabbitmq-server start & 启动rabbitmq<br>
+/usr/local/rabbitmq/sbin/rabbitmqctl status 查看状态<br>
+/usr/local/rabbitmq/sbin/rabbitmqctl stop 关闭rabbitmq<br>
 ## 启用管理插件
-mkdir /etc/rabbitmq
-/usr/local/rabbitmq/sbin/rabbitmq-plugins list 查看插件列表
-/usr/local/rabbitmq/sbin/rabbitmq-plugins enable rabbitmq_management  (启用插件)
-/usr/local/rabbitmq/sbin/rabbitmq-plugins disable rabbitmq_management (禁用插件)
+mkdir /etc/rabbitmq<br>
+/usr/local/rabbitmq/sbin/rabbitmq-plugins list 查看插件列表<br>
+/usr/local/rabbitmq/sbin/rabbitmq-plugins enable rabbitmq_management  (启用插件)<br>
+/usr/local/rabbitmq/sbin/rabbitmq-plugins disable rabbitmq_management (禁用插件)<br>
 
 ## 重启rabbitmq
 ## 访问 http://127.0.0.1:15672/
 
 ## 如果有iptables
-vim /etc/sysconfig/iptables
+vim /etc/sysconfig/iptables<br>
 
 ## 增加一下内容
--A INPUT -m state --state NEW -m tcp -p tcp --dport 15672 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 15672 -j ACCEPT<br>
 
 ## 重启动iptable
-service iptables restart
-开机自启动配置
+service iptables restart<br>
+开机自启动配置<br>
 
 ## !/bin/sh
 ## start rabbitMq
-sudo /usr/local/rabbitmq/sbin/rabbitmq-server & > /usr/local/rabbitmq/logs/rabbitmq.log 2>&1
+sudo /usr/local/rabbitmq/sbin/rabbitmq-server & > /usr/local/rabbitmq/logs/rabbitmq.log 2>&1<br>
 #RabbitMQ PHP扩展安装
 ## 安装rabbitmq-c依赖包
-yum install libtool autoconf
+yum install libtool autoconf<br>
 
 ## 安装rabbitmq-c ( 最好下载 0.5的，0.6安装可能会报错)
 ## 版本下载：https://github.com/alanxz/rabbitmq-c/releases/tag/v0.5.0
-wget https://github.com/alanxz/rabbitmq-c/releases/download/v0.5.0/rabbitmq-c-0.5.0.tar.gz
-tar -zxvf v0.5.0
-cd rabbitmq-c-0.5.0/
-autoreconf -i
-./configure --prefix=/usr/local/rabbitmq-c
-make
-make install
+wget https://github.com/alanxz/rabbitmq-c/releases/download/v0.5.0/rabbitmq-c-0.5.0.tar.gz<br>
+tar -zxvf v0.5.0<br>
+cd rabbitmq-c-0.5.0/<br>
+autoreconf -i<br>
+./configure --prefix=/usr/local/rabbitmq-c<br>
+make<br>
+make install<br>
 
 ## 安装PHP扩展 amqp
-wget http://pecl.php.net/get/amqp-1.6.1.tgz
-tar zxvf amqp-1.6.1.tgz
-cd amqp-1.6.1
-/usr/local/php/bin/phpize
-./configure --with-php-config=/usr/local/php/bin/php-config --with-amqp --with-librabbitmq-dir=/usr/local/rabbitmq-c
-make
-make install
+wget http://pecl.php.net/get/amqp-1.6.1.tgz<br>
+tar zxvf amqp-1.6.1.tgz<br>
+cd amqp-1.6.1<br>
+/usr/local/php/bin/phpize<br>
+./configure --with-php-config=/usr/local/php/bin/php-config --with-amqp --with-librabbitmq-dir=/usr/local/rabbitmq-c<br>
+make<br>
+make install<br>
 
 ## 编辑php.ini文件，增加amqp扩展支持
-vim /usr/local/php/etc/php.ini
+vim /usr/local/php/etc/php.ini<br>
 
 ## 增加下面内容
-; rabbitmq扩展支持
-extension=amqp.so
+; rabbitmq扩展支持<br>
+extension=amqp.so<br>
 
 ## 重启php-fpm
-/etc/init.d/php-fpm restart
+/etc/init.d/php-fpm restart<br>
 ## 验证是否成功 phpinfo()查看下是否支持amqp扩展
