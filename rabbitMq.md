@@ -115,3 +115,117 @@ extension=amqp.so<br>
 ## 重启php-fpm
 /etc/init.d/php-fpm restart<br>
 ## 验证是否成功 phpinfo()查看下是否支持amqp扩展
+
+
+
+
+
+##相关配置
+hostname mq        // 设置hostname名称<br>
+vim /etc/sysconfig/network    // 设置hostname<br>
+vim /etc/hosts    // 编辑hosts<br>
+./rabbitmqctl add_user admin admin     // 添加用户<br>
+./rabbitmqctl set_user_tags admin administrator        // 添加admin 到 administrator分组<br>
+./rabbitmqctl set_permissions -p / admin "*." "*." "*."    // 添加权限<br>
+##创建配置文件
+在/usr/rabbitmq/sbin/rabbitmq-defaults 查看config文件路径<br>
+ ##创建配置文件
+touch/usr/rabbitmq/sbin<br>
+vm_memory_high_watermark 内存低水位线，若低于该水位线，则开启流控机制,阻止所有请求，默认值是0.4，即内存总量的40%,<br>
+vm_memory_high_watermark_paging_ratio 内存低水位线的多少百分比开始通过写入磁盘文件来释放内存<br>
+vi /usr/rabbitmq/sbin/rabbitmq.config 输入<br>
+[<br>
+{rabbit, [{vm_memory_high_watermark_paging_ratio, 0.75},<br>
+         {vm_memory_high_watermark, 0.7}]}<br>
+].<br>
+##创建环境文件
+touch /etc/rabbitmq/rabbitmq-env.conf<br>
+输入<br>
+    RABBITMQ_NODENAME=FZTEC-240088 节点名称<br>
+    RABBITMQ_NODE_IP_ADDRESS=127.0.0.1 监听IP<br>
+    RABBITMQ_NODE_PORT=5672 监听端口<br>
+    RABBITMQ_LOG_BASE=/data/rabbitmq/log 日志目录<br>
+    RABBITMQ_PLUGINS_DIR=/data/rabbitmq/plugins 插件目录<br>
+    RABBITMQ_MNESIA_BASE=/data/rabbitmq/mnesia 后端存储目录<br>
+##操作命令
+#### 查看exchange信息
+          /usr/rabbitmq/sbin/rabbitmqctl list_exchanges name type durable auto_delete arguments<br>
+
+#### 查看队列信息
+          /usr/rabbitmq/sbin/rabbitmqctl list_queues name durable auto_delete messages consumers me<br>
+####  查看绑定信息
+          /usr/rabbitmq/sbin/rabbitmqctl list_bindings<br>
+#### 查看连接信息
+          /usr/rabbitmq/sbin/rabbitmqctl list_connections<br>
+##php的server端脚本
+<?php<br>
+$routingkey='key';<br>
+//设置你的连接<br>
+$conn_args = array('host' => 'localhost', 'port' => '5672', 'login' => 'guest', 'password' => 'guest');<br>
+$conn = new AMQPConnection($conn_args);<br>
+if ($conn->connect()) {<br>
+    echo "Established a connection to the broker \n";<br>
+}<br>
+else {<br>
+    echo "Cannot connect to the broker \n ";<br>
+}<br>
+//你的消息<br>
+$message = json_encode(array('Hello World3!','php3','c++3:'));<br>
+//创建channel<br>
+$channel = new AMQPChannel($conn);<br>
+//创建exchange<br>
+$ex = new AMQPExchange($channel);<br>
+$ex->setName('exchange');//创建名字<br>
+$ex->setType(AMQP_EX_TYPE_DIRECT);<br>
+$ex->setFlags(AMQP_DURABLE);<br>
+//$ex->setFlags(AMQP_AUTODELETE);<br>
+//echo "exchange status:".$ex->declare();<br>
+echo "exchange status:".$ex->declareExchange();<br>
+echo "\n";
+for($i=0;$i<100;$i++){<br>
+        if($routingkey=='key2'){<br>
+                $routingkey='key';<br>
+        }else{<br>
+                $routingkey='key2';<br>
+        }<br>
+        $ex->publish($message,$routingkey);<br>
+}<br>
+/*
+$ex->publish($message,$routingkey);<br>
+创建队列<br>
+$q = new AMQPQueue($channel);<br>
+设置队列名字 如果不存在则添加<br>
+$q->setName('queue');<br>
+$q->setFlags(AMQP_DURABLE | AMQP_AUTODELETE);<br>
+echo "queue status: ".$q->declare();<br>
+echo "\n";<br>
+echo 'queue bind: '.$q->bind('exchange','route.key');<br>
+将你的队列绑定到routingKey<br>
+echo "\n";<br>
+
+$channel->startTransaction();<br>
+echo "send: ".$ex->publish($message, 'route.key'); //将你的消息通过制定routingKey发送<br>
+$channel->commitTransaction();<br>
+$conn->disconnect();<br>
+*/
+##php客户端脚本
+<?php<br>
+$bindingkey='key2';<br>
+//连接RabbitMQ<br>
+$conn_args = array( 'host'=>'127.0.0.1' , 'port'=> '5672', 'login'=>'guest' , 'password'=> 'guest','vhost' =>'/');<br>
+$conn = new AMQPConnection($conn_args);<br>
+$conn->connect();<br>
+//设置queue名称，使用exchange，绑定routingkey<br>
+$channel = new AMQPChannel($conn);<br>
+$q = new AMQPQueue($channel);<br>
+$q->setName('queue2');<br>
+$q->setFlags(AMQP_DURABLE);<br>
+$q->declare();<br>
+$q->bind('exchange',$bindingkey);<br>
+//消息获取<br>
+$messages = $q->get(AMQP_AUTOACK) ;<br>
+if ($messages){<br>
+var_dump(json_decode($messages->getBody(), true ));<br>
+}<br>
+$conn->disconnect();<br>
+?><br>
