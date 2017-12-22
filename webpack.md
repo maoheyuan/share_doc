@@ -3,58 +3,58 @@
 
 ÔÄ¶Á±¾ÎÄÖ®Ç°£¬ÏÈ¿´ÏÂÃæÕâ¸öwebpackµÄÅäÖÃÎÄ¼ş£¬Èç¹ûÃ¿Ò»ÏîÄã¶¼¶®£¬ÄÇ±¾ÎÄÄÜ´ø¸øÄãµÄÊÕ»ñÒ²Ğí¾Í±È½ÏÓĞÏŞ£¬Äã¿ÉÒÔ¿ìËÙä¯ÀÀ»òÖ±½ÓÌø¹ı£»Èç¹ûÄãºÍÊ®ÌìÇ°µÄÎÒÒ»Ñù£¬¶ÔºÜ¶àÑ¡Ïî´æÔÚ×ÅÒÉ»ó£¬ÄÇ»¨Ò»¶ÎÊ±¼äÂıÂıÔÄ¶Á±¾ÎÄ£¬ÄãµÄÒÉ»óÒ»¶¨Ò»¸öÒ»¸ö¶¼»áÏûÊ§£»Èç¹ûÄãÒÔÇ°Ã»ÔõÃ´½Ó´¥¹ıWebpack£¬¶øÄãÓÖÄã¶Ôwebpack¸ĞĞËÈ¤£¬ÄÇÃ´¶¯ÊÖ¸ú×Å±¾ÎÄÖĞÄÇ¸ö¹á´©Ê¼ÖÕµÄÀı×ÓĞ´Ò»´Î£¬Ğ´ÍêÒÔºóÄã»á·¢ÏÖÄãÒÑÃ÷Ã÷°×°×µÄ×ß½øÁËWebpackµÄ´óÃÅ¡£
 // Ò»¸ö³£¼ûµÄ`webpack`ÅäÖÃÎÄ¼ş
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');<br>
+const HtmlWebpackPlugin = require('html-webpack-plugin');<br>
+const ExtractTextPlugin = require('extract-text-webpack-plugin');<br>
 
-module.exports = {
-        entry: __dirname + "/app/main.js", //ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş
-        output: {
-            path: __dirname + "/build",
-            filename: "bundle-[hash].js"
-        },
-        devtool: 'none',
-        devServer: {
-            contentBase: "./public", //±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼
-            historyApiFallback: true, //²»Ìø×ª
-            inline: true,
-            hot: true
-        },
-        module: {
-            rules: [{
-                    test: /(\.jsx|\.js)$/,
-                    use: {
-                        loader: "babel-loader"
-                    },
-                    exclude: /node_modules/
-                }, {
-                    test: /\.css$/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: "style-loader",
-                        use: [{
-                            loader: "css-loader",
-                            options: {
-                                modules: true
-                            }
-                        }, {
-                            loader: "postcss-loader"
-                        }],
-                    })
-                }
-            }
-        ]
-    },
-    plugins: [
-        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),
-        new HtmlWebpackPlugin({
-            template: __dirname + "/app/index.tmpl.html" //new Ò»¸öÕâ¸ö²å¼şµÄÊµÀı£¬²¢´«ÈëÏà¹ØµÄ²ÎÊı
-        }),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
-        new ExtractTextPlugin("style.css")
+module.exports = {<br>
+        entry: __dirname + "/app/main.js", //ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş<br>
+        output: {<br>
+            path: __dirname + "/build",<br>
+            filename: "bundle-[hash].js"<br>
+        },<br>
+        devtool: 'none',<br>
+        devServer: {<br>
+            contentBase: "./public", //±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼<br>
+            historyApiFallback: true, //²»Ìø×ª<br>
+            inline: true,<br>
+            hot: true<br>
+        },<br>
+        module: {<br>
+            rules: [{<br>
+                    test: /(\.jsx|\.js)$/,<br>
+                    use: {<br>
+                        loader: "babel-loader"<br>
+                    },<br>
+                    exclude: /node_modules/<br>
+                }, {<br>
+                    test: /\.css$/,<br>
+                    use: ExtractTextPlugin.extract({<br>
+                        fallback: "style-loader",<br>
+                        use: [{<br>
+                            loader: "css-loader",<br>
+                            options: {<br>
+                                modules: true<br>
+                            }<br>
+                        }, {<br>
+                            loader: "postcss-loader"<br>
+                        }],<br>
+                    })<br>
+                }<br>
+            }<br>
+        ]<br>
+    },<br>
+    plugins: [<br>
+        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),<br>
+        new HtmlWebpackPlugin({<br>
+            template: __dirname + "/app/index.tmpl.html" //new Ò»¸öÕâ¸ö²å¼şµÄÊµÀı£¬²¢´«ÈëÏà¹ØµÄ²ÎÊı<br>
+        }),<br>
+        new webpack.optimize.OccurrenceOrderPlugin(),<br>
+        new webpack.optimize.UglifyJsPlugin(),<br>
+        new ExtractTextPlugin("style.css")<br>
 
-    ],
-};
+    ],<br>
+};<br>
 
 Ê²Ã´ÊÇWebPack£¬ÎªÊ²Ã´ÒªÊ¹ÓÃËü£¿
 
@@ -117,32 +117,32 @@ main.js-- ·ÅÔÚappÎÄ¼ş¼ĞÖĞ;
 ÏîÄ¿½á¹¹
 ÎÒÃÇÔÚindex.htmlÎÄ¼şÖĞĞ´Èë×î»ù´¡µÄhtml´úÂë£¬ËüÔÚÕâÀïÄ¿µÄÔÚÓÚÒıÈë´ò°üºóµÄjsÎÄ¼ş£¨ÕâÀïÎÒÃÇÏÈ°ÑÖ®ºó´ò°üºóµÄjsÎÄ¼şÃüÃûÎªbundle.js£¬Ö®ºóÎÒÃÇ»¹»áÏêÏ¸½²Êö£©¡£
 
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Webpack Sample Project</title>
-  </head>
-  <body>
-    <div id='root'>
-    </div>
-    <script src="bundle.js"></script>
-  </body>
-</html>
+<!-- index.html --><br>
+<!DOCTYPE html><br>
+<html lang="en"><br>
+  <head><br>
+    <meta charset="utf-8"><br>
+    <title>Webpack Sample Project</title><br>
+  </head><br>
+  <body><br>
+    <div id='root'><br>
+    </div><br>
+    <script src="bundle.js"></script><br>
+  </body><br>
+</html><br>
 ÎÒÃÇÔÚGreeter.jsÖĞ¶¨ÒåÒ»¸ö·µ»Ø°üº¬ÎÊºòĞÅÏ¢µÄhtmlÔªËØµÄº¯Êı,²¢ÒÀ¾İCommonJS¹æ·¶µ¼³öÕâ¸öº¯ÊıÎªÒ»¸öÄ£¿é£º
 
 // Greeter.js
-module.exports = function() {
-  var greet = document.createElement('div');
-  greet.textContent = "Hi there and greetings!";
-  return greet;
-};
+module.exports = function() {<br>
+  var greet = document.createElement('div');<br>
+  greet.textContent = "Hi there and greetings!";<br>
+  return greet;<br>
+};<br>
 main.jsÎÄ¼şÖĞÎÒÃÇĞ´ÈëÏÂÊö´úÂë£¬ÓÃÒÔ°ÑGreeterÄ£¿é·µ»ØµÄ½Úµã²åÈëÒ³Ãæ¡£
 
 //main.js 
-const greeter = require('./Greeter.js');
-document.querySelector("#root").appendChild(greeter());
+const greeter = require('./Greeter.js');<br>
+document.querySelector("#root").appendChild(greeter());<br>
 ÕıÊ½Ê¹ÓÃWebpack
 
 webpack¿ÉÒÔÔÚÖÕ¶ËÖĞÊ¹ÓÃ£¬ÔÚ»ù±¾µÄÊ¹ÓÃ·½·¨ÈçÏÂ£º
@@ -154,7 +154,7 @@ webpack {entry file} {destination for bundled file}
 Ö¸¶¨Èë¿ÚÎÄ¼şºó£¬webpack½«×Ô¶¯Ê¶±ğÏîÄ¿ËùÒÀÀµµÄÆäËüÎÄ¼ş£¬²»¹ıĞèÒª×¢ÒâµÄÊÇÈç¹ûÄãµÄwebpack²»ÊÇÈ«¾Ö°²×°µÄ£¬ÄÇÃ´µ±ÄãÔÚÖÕ¶ËÖĞÊ¹ÓÃ´ËÃüÁîÊ±£¬ĞèÒª¶îÍâÖ¸¶¨ÆäÔÚnode_modulesÖĞµÄµØÖ·£¬¼ÌĞøÉÏÃæµÄÀı×Ó£¬ÔÚÖÕ¶ËÖĞÊäÈëÈçÏÂÃüÁî
 
 # webpack·ÇÈ«¾Ö°²×°µÄÇé¿ö
-node_modules/.bin/webpack app/main.js public/bundle.js
+node_modules/.bin/webpack app/main.js public/bundle.js<br>
 ½á¹ûÈçÏÂ
 
 Ê¹ÓÃÃüÁîĞĞ´ò°ü
@@ -168,13 +168,13 @@ WebpackÓµÓĞºÜ¶àÆäËüµÄ±È½Ï¸ß¼¶µÄ¹¦ÄÜ£¨±ÈÈçËµ±¾ÎÄºóÃæ»á½éÉÜµÄloadersºÍplugins£©£¬Õ
 
 ¼ÌĞøÉÏÃæµÄÀı×ÓÀ´ËµÃ÷ÈçºÎĞ´Õâ¸öÅäÖÃÎÄ¼ş£¬ÔÚµ±Ç°Á·Ï°ÎÄ¼ş¼ĞµÄ¸ùÄ¿Â¼ÏÂĞÂ½¨Ò»¸öÃûÎªwebpack.config.jsµÄÎÄ¼ş£¬ÎÒÃÇÔÚÆäÖĞĞ´ÈëÈçÏÂËùÊ¾µÄ¼òµ¥ÅäÖÃ´úÂë£¬Ä¿Ç°µÄÅäÖÃÖ÷ÒªÉæ¼°µ½µÄÄÚÈİÊÇÈë¿ÚÎÄ¼şÂ·¾¶ºÍ´ò°üºóÎÄ¼şµÄ´æ·ÅÂ·¾¶¡£
 
-module.exports = {
-  entry:  __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş
-  output: {
-    path: __dirname + "/public",//´ò°üºóµÄÎÄ¼ş´æ·ÅµÄµØ·½
-    filename: "bundle.js"//´ò°üºóÊä³öÎÄ¼şµÄÎÄ¼şÃû
-  }
-}
+module.exports = {<br>
+  entry:  __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş<br>
+  output: {<br>
+    path: __dirname + "/public",//´ò°üºóµÄÎÄ¼ş´æ·ÅµÄµØ·½<br>
+    filename: "bundle.js"//´ò°üºóÊä³öÎÄ¼şµÄÎÄ¼şÃû<br>
+  }<br>
+}<br>
 ×¢£º¡°__dirname¡±ÊÇnode.jsÖĞµÄÒ»¸öÈ«¾Ö±äÁ¿£¬ËüÖ¸Ïòµ±Ç°Ö´ĞĞ½Å±¾ËùÔÚµÄÄ¿Â¼¡£
 ÓĞÁËÕâ¸öÅäÖÃÖ®ºó£¬ÔÙ´ò°üÎÄ¼ş£¬Ö»ĞèÔÚÖÕ¶ËÀïÔËĞĞwebpack(·ÇÈ«¾Ö°²×°ĞèÊ¹ÓÃnode_modules/.bin/webpack)ÃüÁî¾Í¿ÉÒÔÁË£¬ÕâÌõÃüÁî»á×Ô¶¯ÒıÓÃwebpack.config.jsÎÄ¼şÖĞµÄÅäÖÃÑ¡Ïî£¬Ê¾ÀıÈçÏÂ£º
 
@@ -186,18 +186,18 @@ module.exports = {
 ÔÚÃüÁîĞĞÖĞÊäÈëÃüÁîĞèÒª´úÂëÀàËÆÓÚnode_modules/.bin/webpackÕâÑùµÄÂ·¾¶ÆäÊµÊÇ±È½Ï·³ÈËµÄ£¬²»¹ıÖµµÃÇìĞÒµÄÊÇnpm¿ÉÒÔÒıµ¼ÈÎÎñÖ´ĞĞ£¬¶Ônpm½øĞĞÅäÖÃºó¿ÉÒÔÔÚÃüÁîĞĞÖĞÊ¹ÓÃ¼òµ¥µÄnpm startÃüÁîÀ´Ìæ´úÉÏÃæÂÔÎ¢·±ËöµÄÃüÁî¡£ÔÚpackage.jsonÖĞ¶Ôscripts¶ÔÏó½øĞĞÏà¹ØÉèÖÃ¼´¿É£¬ÉèÖÃ·½·¨ÈçÏÂ¡£
 
 {
-  "name": "webpack-sample-project",
-  "version": "1.0.0",
-  "description": "Sample webpack project",
-  "scripts": {
-    "start": "webpack" // ĞŞ¸ÄµÄÊÇÕâÀï£¬JSONÎÄ¼ş²»Ö§³Ö×¢ÊÍ£¬ÒıÓÃÊ±ÇëÇå³ı
-  },
-  "author": "zhang",
-  "license": "ISC",
-  "devDependencies": {
-    "webpack": "^1.12.9"
-  }
-}
+  "name": "webpack-sample-project",<br>
+  "version": "1.0.0",<br>
+  "description": "Sample webpack project",<br>
+  "scripts": {<br>
+    "start": "webpack" // ĞŞ¸ÄµÄÊÇÕâÀï£¬JSONÎÄ¼ş²»Ö§³Ö×¢ÊÍ£¬ÒıÓÃÊ±ÇëÇå³ı<br>
+  },<br>
+  "author": "zhang",<br>
+  "license": "ISC",<br>
+  "devDependencies": {<br>
+    "webpack": "^1.12.9"<br>
+  }<br>
+}<br>
 ×¢£ºpackage.jsonÖĞµÄscript»á°²×°Ò»¶¨Ë³ĞòÑ°ÕÒÃüÁî¶ÔÓ¦Î»ÖÃ£¬±¾µØµÄnode_modules/.binÂ·¾¶¾ÍÔÚÕâ¸öÑ°ÕÒÇåµ¥ÖĞ£¬ËùÒÔÎŞÂÛÊÇÈ«¾Ö»¹ÊÇ¾Ö²¿°²×°µÄWebpack£¬Äã¶¼²»ĞèÒªĞ´Ç°ÃæÄÇÖ¸Ã÷ÏêÏ¸µÄÂ·¾¶ÁË¡£
 npmµÄstartÃüÁîÊÇÒ»¸öÌØÊâµÄ½Å±¾Ãû³Æ£¬ÆäÌØÊâĞÔ±íÏÖÔÚ£¬ÔÚÃüÁîĞĞÖĞÊ¹ÓÃnpm start¾Í¿ÉÒÔÖ´ĞĞÆä¶ÔÓÚµÄÃüÁî£¬Èç¹û¶ÔÓ¦µÄ´Ë½Å±¾Ãû³Æ²»ÊÇstart£¬ÏëÒªÔÚÃüÁîĞĞÖĞÔËĞĞÊ±£¬ĞèÒªÕâÑùÓÃnpm run {script name}Èçnpm run build£¬ÎÒÃÇÔÚÃüÁîĞĞÖĞÊäÈënpm startÊÔÊÔ£¬Êä³ö½á¹ûÈçÏÂ£º
 
@@ -224,14 +224,14 @@ cheap-module-eval-source-map	ÕâÊÇÔÚ´ò°üÎÄ¼şÊ±×î¿ìµÄÉú³Ésource mapµÄ·½·¨£¬Éú³ÉµÄS
 
 ¶ÔĞ¡µ½ÖĞĞÍµÄÏîÄ¿ÖĞ£¬eval-source-mapÊÇÒ»¸öºÜºÃµÄÑ¡Ïî£¬ÔÙ´ÎÇ¿µ÷ÄãÖ»Ó¦¸Ã¿ª·¢½×¶ÎÊ¹ÓÃËü£¬ÎÒÃÇ¼ÌĞø¶ÔÉÏÎÄĞÂ½¨µÄwebpack.config.js£¬½øĞĞÈçÏÂÅäÖÃ:
 
-module.exports = {
-  devtool: 'eval-source-map',
-  entry:  __dirname + "/app/main.js",
-  output: {
-    path: __dirname + "/public",
-    filename: "bundle.js"
-  }
-}
+module.exports = {<br>
+  devtool: 'eval-source-map',<br>
+  entry:  __dirname + "/app/main.js",<br>
+  output: {<br>
+    path: __dirname + "/public",<br>
+    filename: "bundle.js"<br>
+  }<br>
+}<br>
 cheap-module-eval-source-map·½·¨¹¹½¨ËÙ¶È¸ü¿ì£¬µ«ÊÇ²»ÀûÓÚµ÷ÊÔ£¬ÍÆ¼öÔÚ´óĞÍÏîÄ¿¿¼ÂÇÊ±¼ä³É±¾Ê±Ê¹ÓÃ¡£
 Ê¹ÓÃwebpack¹¹½¨±¾µØ·şÎñÆ÷
 
@@ -247,28 +247,28 @@ inline	ÉèÖÃÎªtrue£¬µ±Ô´ÎÄ¼ş¸Ä±äÊ±»á×Ô¶¯Ë¢ĞÂÒ³Ãæ
 historyApiFallback	ÔÚ¿ª·¢µ¥Ò³Ó¦ÓÃÊ±·Ç³£ÓĞÓÃ£¬ËüÒÀÀµÓÚHTML5 history API£¬Èç¹ûÉèÖÃÎªtrue£¬ËùÓĞµÄÌø×ª½«Ö¸Ïòindex.html
 °ÑÕâĞ©ÃüÁî¼Óµ½webpackµÄÅäÖÃÎÄ¼şÖĞ£¬ÏÖÔÚµÄÅäÖÃÎÄ¼şwebpack.config.jsÈçÏÂËùÊ¾
 
-module.exports = {
-  devtool: 'eval-source-map',
+module.exports = {<br>
+  devtool: 'eval-source-map',<br>
 
-  entry:  __dirname + "/app/main.js",
-  output: {
-    path: __dirname + "/public",
-    filename: "bundle.js"
-  },
+  entry:  __dirname + "/app/main.js",<br>
+  output: {<br>
+    path: __dirname + "/public",<br>
+    filename: "bundle.js"<br>
+  },<br>
 
-  devServer: {
-    contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼
-    historyApiFallback: true,//²»Ìø×ª
-    inline: true//ÊµÊ±Ë¢ĞÂ
-  } 
-}
+  devServer: {<br>
+    contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼<br>
+    historyApiFallback: true,//²»Ìø×ª<br>
+    inline: true//ÊµÊ±Ë¢ĞÂ<br>
+  } <br>
+}<br>
 ÔÚpackage.jsonÖĞµÄscripts¶ÔÏóÖĞÌí¼ÓÈçÏÂÃüÁî£¬ÓÃÒÔ¿ªÆô±¾µØ·şÎñÆ÷£º
 
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack",
-    "server": "webpack-dev-server --open"
-  },
+  "scripts": {<br>
+    "test": "echo \"Error: no test specified\" && exit 1",<br>
+    "start": "webpack",<br>
+    "server": "webpack-dev-server --open"<br>
+  },<br>
 ÔÚÖÕ¶ËÖĞÊäÈënpm run server¼´¿ÉÔÚ±¾µØµÄ8080¶Ë¿Ú²é¿´½á¹û
 
 ¿ªÆô±¾µØ·şÎñÆ÷
@@ -293,13 +293,13 @@ query£ºÎªloadersÌá¹©¶îÍâµÄÉèÖÃÑ¡Ïî£¨¿ÉÑ¡£©
 }
 ¸üĞÂºóµÄGreeter.js
 
-var config = require('./config.json');
+var config = require('./config.json');<br>
 
-module.exports = function() {
-  var greet = document.createElement('div');
-  greet.textContent = config.greetText;
-  return greet;
-};
+module.exports = function() {<br>
+  var greet = document.createElement('div');<br>
+  greet.textContent = config.greetText;<br>
+  return greet;<br>
+};<br>
 ×¢ ÓÉÓÚwebpack3.*/webpack2.*ÒÑ¾­ÄÚÖÃ¿É´¦ÀíJSONÎÄ¼ş£¬ÕâÀïÎÒÃÇÎŞĞèÔÙÌí¼Ówebpack1.*ĞèÒªµÄjson-loader¡£ÔÚ¿´ÈçºÎ¾ßÌåÊ¹ÓÃloaderÖ®Ç°ÎÒÃÇÏÈ¿´¿´BabelÊÇÊ²Ã´£¿
 Babel
 
@@ -317,33 +317,33 @@ BabelÆäÊµÊÇ¼¸¸öÄ£¿é»¯µÄ°ü£¬ÆäºËĞÄ¹¦ÄÜÎ»ÓÚ³ÆÎªbabel-coreµÄnpm°üÖĞ£¬webpack¿ÉÒÔ°ÑÆ
 npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
 ÔÚwebpackÖĞÅäÖÃBabelµÄ·½·¨ÈçÏÂ:
 
-module.exports = {
-    entry: __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş
-    output: {
-        path: __dirname + "/public",//´ò°üºóµÄÎÄ¼ş´æ·ÅµÄµØ·½
-        filename: "bundle.js"//´ò°üºóÊä³öÎÄ¼şµÄÎÄ¼şÃû
-    },
-    devtool: 'eval-source-map',
-    devServer: {
-        contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼
-        historyApiFallback: true,//²»Ìø×ª
-        inline: true//ÊµÊ±Ë¢ĞÂ
-    },
-    module: {
-        rules: [
-            {
-                test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: [
-                            "es2015", "react"
-                        ]
-                    }
-                },
-                exclude: /node_modules/
-            }
-        ]
+module.exports = {<br>
+    entry: __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş<br>
+    output: {<br>
+        path: __dirname + "/public",//´ò°üºóµÄÎÄ¼ş´æ·ÅµÄµØ·½<br>
+        filename: "bundle.js"//´ò°üºóÊä³öÎÄ¼şµÄÎÄ¼şÃû<br>
+    },<br>
+    devtool: 'eval-source-map',<br>
+    devServer: {<br>
+        contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼<br>
+        historyApiFallback: true,//²»Ìø×ª<br>
+        inline: true//ÊµÊ±Ë¢ĞÂ<br>
+    },<br>
+    module: {<br>
+        rules: [<br>
+            {<br>
+                test: /(\.jsx|\.js)$/,<br>
+                use: {<br>
+                    loader: "babel-loader",<br>
+                    options: {<br>
+                        presets: [<br>
+                            "es2015", "react"<br>
+                        ]<br>
+                    }<br>
+                },<br>
+                exclude: /node_modules/<br>
+            }<br>
+        ]<br>
     }
 };
 ÏÖÔÚÄãµÄwebpackµÄÅäÖÃÒÑ¾­ÔÊĞíÄãÊ¹ÓÃES6ÒÔ¼°JSXµÄÓï·¨ÁË¡£¼ÌĞøÓÃÉÏÃæµÄÀı×Ó½øĞĞ²âÊÔ£¬²»¹ıÕâ´ÎÎÒÃÇ»áÊ¹ÓÃReact£¬¼ÇµÃÏÈ°²×° React ºÍ React-DOM
@@ -572,42 +572,42 @@ Stylus Loader
 npm install --save-dev postcss-loader autoprefixer
 ½ÓÏÂÀ´£¬ÔÚwebpackÅäÖÃÎÄ¼şÖĞÌí¼Ópostcss-loader£¬ÔÚ¸ùÄ¿Â¼ĞÂ½¨postcss.config.js,²¢Ìí¼ÓÈçÏÂ´úÂëÖ®ºó£¬ÖØĞÂÊ¹ÓÃnpm start´ò°üÊ±£¬ÄãĞ´µÄcss»á×Ô¶¯¸ù¾İCan i useÀïµÄÊı¾İÌí¼Ó²»Í¬Ç°×ºÁË¡£
 
-//webpack.config.js
-module.exports = {
-    ...
-    module: {
-        rules: [
-            {
-                test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader"
-                    }, {
-                        loader: "css-loader",
-                        options: {
-                            modules: true
-                        }
-                    }, {
-                        loader: "postcss-loader"
-                    }
-                ]
-            }
-        ]
-    }
-}
-// postcss.config.js
-module.exports = {
-    plugins: [
-        require('autoprefixer')
-    ]
-}
+//webpack.config.js<br>
+module.exports = {<br>
+    ...<br>
+    module: {<br>
+        rules: [<br>
+            {<br>
+                test: /(\.jsx|\.js)$/,<br>
+                use: {<br>
+                    loader: "babel-loader"<br>
+                },<br>
+                exclude: /node_modules/<br>
+            },<br>
+            {<br>
+                test: /\.css$/,<br>
+                use: [<br>
+                    {<br>
+                        loader: "style-loader"<br>
+                    }, {<br>
+                        loader: "css-loader",<br>
+                        options: {<br>
+                            modules: true<br>
+                        }<br>
+                    }, {<br>
+                        loader: "postcss-loader"<br>
+                    }<br>
+                ]<br>
+            }<br>
+        ]<br>
+    }<br>
+}<br>
+// postcss.config.js<br>
+module.exports = {<br>
+    plugins: [<br>
+        require('autoprefixer')<br>
+    ]<br>
+}<br>
 ÖÁ´Ë£¬±¾ÎÄÒÑ¾­Ì¸ÂÛÁË´¦ÀíJSµÄBabelºÍ´¦ÀíCSSµÄPostCSSµÄ»ù±¾ÓÃ·¨£¬ËüÃÇÆäÊµÒ²ÊÇÁ½¸öµ¥¶ÀµÄÆ½Ì¨£¬ÅäºÏwebpack¿ÉÒÔºÜºÃµÄ·¢»ÓËüÃÇµÄ×÷ÓÃ¡£½ÓÏÂÀ´½éÉÜWebpackÖĞÁíÒ»¸ö·Ç³£ÖØÒªµÄ¹¦ÄÜ-Plugins
 
 ²å¼ş£¨Plugins£©
@@ -621,40 +621,40 @@ WebpackÓĞºÜ¶àÄÚÖÃ²å¼ş£¬Í¬Ê±Ò²ÓĞºÜ¶àµÚÈı·½²å¼ş£¬¿ÉÒÔÈÃÎÒÃÇÍê³É¸ü¼Ó·á¸»µÄ¹¦ÄÜ¡£
 
 ÒªÊ¹ÓÃÄ³¸ö²å¼ş£¬ÎÒÃÇĞèÒªÍ¨¹ınpm°²×°Ëü£¬È»ºóÒª×öµÄ¾ÍÊÇÔÚwebpackÅäÖÃÖĞµÄplugins¹Ø¼ü×Ö²¿·ÖÌí¼Ó¸Ã²å¼şµÄÒ»¸öÊµÀı£¨pluginsÊÇÒ»¸öÊı×é£©¼ÌĞøÉÏÃæµÄÀı×Ó£¬ÎÒÃÇÌí¼ÓÁËÒ»¸ö¸ø´ò°üºó´úÂëÌí¼Ó°æÈ¨ÉùÃ÷µÄ²å¼ş¡£
 
-const webpack = require('webpack');
+const webpack = require('webpack');<br>
 
-module.exports = {
-...
-    module: {
-        rules: [
-            {
-                test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader"
-                    }, {
-                        loader: "css-loader",
-                        options: {
-                            modules: true
-                        }
-                    }, {
-                        loader: "postcss-loader"
-                    }
-                ]
-            }
-        ]
-    },
-    plugins: [
-        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿')
-    ],
-};
+module.exports = {<br>
+...<br>
+    module: {<br>
+        rules: [<br>
+            {<br>
+                test: /(\.jsx|\.js)$/,<br>
+                use: {<br>
+                    loader: "babel-loader"<br>
+                },<br>
+                exclude: /node_modules/<br>
+            },<br>
+            {<br>
+                test: /\.css$/,<br>
+                use: [<br>
+                    {<br>
+                        loader: "style-loader"<br>
+                    }, {<br>
+                        loader: "css-loader",<br>
+                        options: {<br>
+                            modules: true<br>
+                        }<br>
+                    }, {<br>
+                        loader: "postcss-loader"<br>
+                    }<br>
+                ]<br>
+            }<br>
+        ]<br>
+    },<br>
+    plugins: [<br>
+        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿')<br>
+    ],<br>
+};<br>
 Í¨¹ıÕâ¸ö²å¼ş£¬´ò°üºóµÄJSÎÄ¼şÏÔÊ¾ÈçÏÂ
 
 °æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿
@@ -671,67 +671,67 @@ npm install --save-dev html-webpack-plugin
 
 ÒÆ³ıpublicÎÄ¼ş¼Ğ£¬ÀûÓÃ´Ë²å¼ş£¬index.htmlÎÄ¼ş»á×Ô¶¯Éú³É£¬´ËÍâCSSÒÑ¾­Í¨¹ıÇ°ÃæµÄ²Ù×÷´ò°üµ½JSÖĞÁË¡£
 ÔÚappÄ¿Â¼ÏÂ£¬´´½¨Ò»¸öindex.tmpl.htmlÎÄ¼şÄ£°å£¬Õâ¸öÄ£°å°üº¬titleµÈ±ØĞëÔªËØ£¬ÔÚ±àÒë¹ı³ÌÖĞ£¬²å¼ş»áÒÀ¾İ´ËÄ£°åÉú³É×îÖÕµÄhtmlÒ³Ãæ£¬»á×Ô¶¯Ìí¼ÓËùÒÀÀµµÄ css, js£¬faviconµÈÎÄ¼ş£¬index.tmpl.htmlÖĞµÄÄ£°åÔ´´úÂëÈçÏÂ£º
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Webpack Sample Project</title>
-  </head>
-  <body>
-    <div id='root'>
+<!DOCTYPE html><br>
+<html lang="en"><br>
+  <head><br>
+    <meta charset="utf-8"><br>
+    <title>Webpack Sample Project</title><br>
+  </head><br>
+  <body><br>
+    <div id='root'><br>
     </div>
-  </body>
-</html>
-3.¸üĞÂwebpackµÄÅäÖÃÎÄ¼ş£¬·½·¨Í¬ÉÏ,ĞÂ½¨Ò»¸öbuildÎÄ¼ş¼ĞÓÃÀ´´æ·Å×îÖÕµÄÊä³öÎÄ¼ş
+  </body><br>
+</html><br>
+3.¸üĞÂwebpackµÄÅäÖÃÎÄ¼ş£¬·½·¨Í¬ÉÏ,ĞÂ½¨Ò»¸öbuildÎÄ¼ş¼ĞÓÃÀ´´æ·Å×îÖÕµÄÊä³öÎÄ¼ş<br>
 
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');<br>
+const HtmlWebpackPlugin = require('html-webpack-plugin');<br>
 
-module.exports = {
-    entry: __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş
-    output: {
-        path: __dirname + "/build",
-        filename: "bundle.js"
-    },
-    devtool: 'eval-source-map',
-    devServer: {
-        contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼
-        historyApiFallback: true,//²»Ìø×ª
-        inline: true//ÊµÊ±Ë¢ĞÂ
-    },
-    module: {
-        rules: [
-            {
-                test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader"
-                    }, {
-                        loader: "css-loader",
-                        options: {
-                            modules: true
-                        }
-                    }, {
-                        loader: "postcss-loader"
-                    }
-                ]
-            }
-        ]
-    },
-    plugins: [
-        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),
-        new HtmlWebpackPlugin({
-            template: __dirname + "/app/index.tmpl.html"//new Ò»¸öÕâ¸ö²å¼şµÄÊµÀı£¬²¢´«ÈëÏà¹ØµÄ²ÎÊı
-        })
-    ],
-};
+module.exports = {<br>
+    entry: __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş<br>
+    output: {<br>
+        path: __dirname + "/build",<br>
+        filename: "bundle.js"<br>
+    },<br>
+    devtool: 'eval-source-map',<br>
+    devServer: {<br>
+        contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼<br>
+        historyApiFallback: true,//²»Ìø×ª<br>
+        inline: true//ÊµÊ±Ë¢ĞÂ<br>
+    },<br>
+    module: {<br>
+        rules: [<br>
+            {<br>
+                test: /(\.jsx|\.js)$/,<br>
+                use: {<br>
+                    loader: "babel-loader"<br>
+                },<br>
+                exclude: /node_modules/<br>
+            },<br>
+            {<br>
+                test: /\.css$/,<br>
+                use: [<br>
+                    {<br>
+                        loader: "style-loader"<br>
+                    }, {<br>
+                        loader: "css-loader",<br>
+                        options: {<br>
+                            modules: true<br>
+                        }<br>
+                    }, {<br>
+                        loader: "postcss-loader"<br>
+                    }<br>
+                ]<br>
+            }<br>
+        ]<br>
+    },<br>
+    plugins: [<br>
+        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),<br>
+        new HtmlWebpackPlugin({<br>
+            template: __dirname + "/app/index.tmpl.html"//new Ò»¸öÕâ¸ö²å¼şµÄÊµÀı£¬²¢´«ÈëÏà¹ØµÄ²ÎÊı<br>
+        })<br>
+    ],<br>
+};<br>
 ÔÙ´ÎÖ´ĞĞnpm startÄã»á·¢ÏÖ£¬buildÎÄ¼ş¼ĞÏÂÃæÉú³ÉÁËbundle.jsºÍindex.html¡£
 
 
@@ -755,79 +755,79 @@ HMRÊÇÒ»¸öwebpack²å¼ş£¬ËüÈÃÄãÄÜä¯ÀÀÆ÷ÖĞÊµÊ±¹Û²ìÄ£¿éĞŞ¸ÄºóµÄĞ§¹û£¬µ«ÊÇÈç¹ûÄãÏëÈÃËü
 BabelÓĞÒ»¸ö½Ğ×öreact-transform-hrmµÄ²å¼ş£¬¿ÉÒÔÔÚ²»¶ÔReactÄ£¿é½øĞĞ¶îÍâµÄÅäÖÃµÄÇ°ÌáÏÂÈÃHMRÕı³£¹¤×÷£»
 »¹ÊÇ¼ÌĞøÉÏÀıÀ´Êµ¼Ê¿´¿´ÈçºÎÅäÖÃ
 
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');<br>
+const HtmlWebpackPlugin = require('html-webpack-plugin');<br>
 
-module.exports = {
-    entry: __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş
-    output: {
-        path: __dirname + "/build",
-        filename: "bundle.js"
-    },
-    devtool: 'eval-source-map',
-    devServer: {
-        contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼
-        historyApiFallback: true,//²»Ìø×ª
-        inline: true,
-        hot: true
-    },
-    module: {
-        rules: [
-            {
-                test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader"
-                    }, {
-                        loader: "css-loader",
-                        options: {
-                            modules: true
-                        }
-                    }, {
-                        loader: "postcss-loader"
-                    }
-                ]
-            }
-        ]
-    },
-    plugins: [
-        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),
-        new HtmlWebpackPlugin({
-            template: __dirname + "/app/index.tmpl.html"//new Ò»¸öÕâ¸ö²å¼şµÄÊµÀı£¬²¢´«ÈëÏà¹ØµÄ²ÎÊı
-        }),
-        new webpack.HotModuleReplacementPlugin()//ÈÈ¼ÓÔØ²å¼ş
-    ],
-};
+module.exports = {<br>
+    entry: __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş<br>
+    output: {<br>
+        path: __dirname + "/build",<br>
+        filename: "bundle.js"<br>
+    },<br>
+    devtool: 'eval-source-map',<br>
+    devServer: {<br>
+        contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼<br>
+        historyApiFallback: true,//²»Ìø×ª<br>
+        inline: true,<br>
+        hot: true<br>
+    },<br>
+    module: {<br>
+        rules: [<br>
+            {<br>
+                test: /(\.jsx|\.js)$/,<br>
+                use: {<br>
+                    loader: "babel-loader"<br>
+                },<br>
+                exclude: /node_modules/<br>
+            },<br>
+            {<br>
+                test: /\.css$/,<br>
+                use: [<br>
+                    {<br>
+                        loader: "style-loader"<br>
+                    }, {<br>
+                        loader: "css-loader",<br>
+                        options: {<br>
+                            modules: true<br>
+                        }<br>
+                    }, {<br>
+                        loader: "postcss-loader"<br>
+                    }<br>
+                ]<br>
+            }<br>
+        ]<br>
+    },<br>
+    plugins: [<br>
+        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),<br>
+        new HtmlWebpackPlugin({<br>
+            template: __dirname + "/app/index.tmpl.html"//new Ò»¸öÕâ¸ö²å¼şµÄÊµÀı£¬²¢´«ÈëÏà¹ØµÄ²ÎÊı<br>
+        }),<br>
+        new webpack.HotModuleReplacementPlugin()//ÈÈ¼ÓÔØ²å¼ş<br>
+    ],<br>
+};<br>
    
 °²×°react-transform-hmr
 
 npm install --save-dev babel-plugin-react-transform react-transform-hmr
 ÅäÖÃBabel
 
-// .babelrc
-{
-  "presets": ["react", "es2015"],
-  "env": {
-    "development": {
-    "plugins": [["react-transform", {
-       "transforms": [{
-         "transform": "react-transform-hmr",
+// .babelrc<br>
+{<br>
+  "presets": ["react", "es2015"],<br>
+  "env": {<br>
+    "development": {<br>
+    "plugins": [["react-transform", {<br>
+       "transforms": [{<br>
+         "transform": "react-transform-hmr",<br>
          
-         "imports": ["react"],
+         "imports": ["react"],<br>
          
-         "locals": ["module"]
-       }]
-     }]]
-    }
-  }
-}
+         "locals": ["module"]<br>
+       }]<br>
+     }]]<br>
+    }<br>
+  }<br>
+}<br>
 ÏÖÔÚµ±ÄãÊ¹ÓÃReactÊ±£¬¿ÉÒÔÈÈ¼ÓÔØÄ£¿éÁË,Ã¿´Î±£´æ¾ÍÄÜÔÚä¯ÀÀÆ÷ÉÏ¿´µ½¸üĞÂÄÚÈİ¡£
 
 ²úÆ·½×¶ÎµÄ¹¹½¨
@@ -836,141 +836,141 @@ npm install --save-dev babel-plugin-react-transform react-transform-hmr
 
 ¶ÔÓÚ¸´ÔÓµÄÏîÄ¿À´Ëµ£¬ĞèÒª¸´ÔÓµÄÅäÖÃ£¬ÕâÊ±ºò·Ö½âÅäÖÃÎÄ¼şÎª¶à¸öĞ¡µÄÎÄ¼ş¿ÉÒÔÊ¹µÃÊÂÇé¾®¾®ÓĞÌõ£¬ÒÔÉÏÃæµÄÀı×ÓÀ´Ëµ£¬ÎÒÃÇ´´½¨Ò»¸öwebpack.production.config.jsµÄÎÄ¼ş£¬ÔÚÀïÃæ¼ÓÉÏ»ù±¾µÄÅäÖÃ,ËüºÍÔ­Ê¼µÄwebpack.config.jsºÜÏñ£¬ÈçÏÂ
 
-// webpack.production.config.js
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// webpack.production.config.js<br>
+const webpack = require('webpack');<br>
+const HtmlWebpackPlugin = require('html-webpack-plugin');<br>
 
-module.exports = {
-    entry: __dirname + "/app/main.js", //ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş
-    output: {
-        path: __dirname + "/build",
-        filename: "bundle.js"
-    },
-    devtool: 'eval-source-map',
-    devServer: {
-        contentBase: "./public", //±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼
-        historyApiFallback: true, //²»Ìø×ª
-        inline: true,
-        hot: true
-    },
-    module: {
-        rules: [{
-            test: /(\.jsx|\.js)$/,
-            use: {
-                loader: "babel-loader"
-            },
-            exclude: /node_modules/
-        }, {
-            test: /\.css$/,
-            use: ExtractTextPlugin.extract({
-                fallback: "style-loader",
-                use: [{
-                    loader: "css-loader",
-                    options: {
-                        modules: true
-                    }
-                }, {
-                    loader: "postcss-loader"
-                }],
-            })
-        }]
-    },
-    plugins: [
-        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),
-        new HtmlWebpackPlugin({
-            template: __dirname + "/app/index.tmpl.html" //new Ò»¸öÕâ¸ö²å¼şµÄÊµÀı£¬²¢´«ÈëÏà¹ØµÄ²ÎÊı
-        }),
-        new webpack.HotModuleReplacementPlugin() //ÈÈ¼ÓÔØ²å¼ş
-    ],
-};
-//package.json
-{
-  "name": "test",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack",
-    "server": "webpack-dev-server --open",
-    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"
+module.exports = {<br>
+    entry: __dirname + "/app/main.js", //ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş<br>
+    output: {<br>
+        path: __dirname + "/build",<br>
+        filename: "bundle.js"<br>
+    },<br>
+    devtool: 'eval-source-map',<br>
+    devServer: {<br>
+        contentBase: "./public", //±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼<br>
+        historyApiFallback: true, //²»Ìø×ª<br>
+        inline: true,<br>
+        hot: true<br>
+    },<br>
+    module: {<br>
+        rules: [{<br>
+            test: /(\.jsx|\.js)$/,<br>
+            use: {<br>
+                loader: "babel-loader"<br>
+            },<br>
+            exclude: /node_modules/<br>
+        }, {<br>
+            test: /\.css$/,<br>
+            use: ExtractTextPlugin.extract({<br>
+                fallback: "style-loader",<br>
+                use: [{<br>
+                    loader: "css-loader",<br>
+                    options: {<br>
+                        modules: true<br>
+                    }<br>
+                }, {<br>
+                    loader: "postcss-loader"<br>
+                }],<br>
+            })<br>
+        }]<br>
+    },<br>
+    plugins: [<br>
+        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),<br>
+        new HtmlWebpackPlugin({<br>
+            template: __dirname + "/app/index.tmpl.html" //new Ò»¸öÕâ¸ö²å¼şµÄÊµÀı£¬²¢´«ÈëÏà¹ØµÄ²ÎÊı<br>
+        }),<br>
+        new webpack.HotModuleReplacementPlugin() //ÈÈ¼ÓÔØ²å¼ş<br>
+    ],<br>
+};<br>
+//package.json<br>
+{<br>
+  "name": "test",<br>
+  "version": "1.0.0",<br>
+  "description": "",<br>
+  "main": "index.js",<br>
+  "scripts": {<br>
+    "test": "echo \"Error: no test specified\" && exit 1",<br>
+    "start": "webpack",<br>
+    "server": "webpack-dev-server --open",<br>
+    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"<br>
   },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-...
-  },
-  "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
-  }
-}
-ÓÅ»¯²å¼ş
+  "author": "",<br>
+  "license": "ISC",<br>
+  "devDependencies": {<br>
+...<br>
+  },<br>
+  "dependencies": {<br>
+    "react": "^15.6.1",<br>
+    "react-dom": "^15.6.1"<br>
+  }<br>
+}<br>
+ÓÅ»¯²å¼ş<br>
 
-webpackÌá¹©ÁËÒ»Ğ©ÔÚ·¢²¼½×¶Î·Ç³£ÓĞÓÃµÄÓÅ»¯²å¼ş£¬ËüÃÇ´ó¶àÀ´×ÔÓÚwebpackÉçÇø£¬¿ÉÒÔÍ¨¹ınpm°²×°£¬Í¨¹ıÒÔÏÂ²å¼ş¿ÉÒÔÍê³É²úÆ··¢²¼½×¶ÎËùĞèµÄ¹¦ÄÜ
+webpackÌá¹©ÁËÒ»Ğ©ÔÚ·¢²¼½×¶Î·Ç³£ÓĞÓÃµÄÓÅ»¯²å¼ş£¬ËüÃÇ´ó¶àÀ´×ÔÓÚwebpackÉçÇø£¬¿ÉÒÔÍ¨¹ınpm°²×°£¬Í¨¹ıÒÔÏÂ²å¼ş¿ÉÒÔÍê³É²úÆ··¢²¼½×¶ÎËùĞèµÄ¹¦ÄÜ<br>
 
-OccurenceOrderPlugin :Îª×é¼ş·ÖÅäID£¬Í¨¹ıÕâ¸ö²å¼şwebpack¿ÉÒÔ·ÖÎöºÍÓÅÏÈ¿¼ÂÇÊ¹ÓÃ×î¶àµÄÄ£¿é£¬²¢ÎªËüÃÇ·ÖÅä×îĞ¡µÄID
-UglifyJsPlugin£ºÑ¹ËõJS´úÂë£»
-ExtractTextPlugin£º·ÖÀëCSSºÍJSÎÄ¼ş
-ÎÒÃÇ¼ÌĞøÓÃÀı×ÓÀ´¿´¿´ÈçºÎÌí¼ÓËüÃÇ£¬OccurenceOrder ºÍ UglifyJS plugins ¶¼ÊÇÄÚÖÃ²å¼ş£¬ÄãĞèÒª×öµÄÖ»ÊÇ°²×°ÆäËü·ÇÄÚÖÃ²å¼ş
+OccurenceOrderPlugin :Îª×é¼ş·ÖÅäID£¬Í¨¹ıÕâ¸ö²å¼şwebpack¿ÉÒÔ·ÖÎöºÍÓÅÏÈ¿¼ÂÇÊ¹ÓÃ×î¶àµÄÄ£¿é£¬²¢ÎªËüÃÇ·ÖÅä×îĞ¡µÄID<br>
+UglifyJsPlugin£ºÑ¹ËõJS´úÂë£»<br>
+ExtractTextPlugin£º·ÖÀëCSSºÍJSÎÄ¼ş<br>
+ÎÒÃÇ¼ÌĞøÓÃÀı×ÓÀ´¿´¿´ÈçºÎÌí¼ÓËüÃÇ£¬OccurenceOrder ºÍ UglifyJS plugins ¶¼ÊÇÄÚÖÃ²å¼ş£¬ÄãĞèÒª×öµÄÖ»ÊÇ°²×°ÆäËü·ÇÄÚÖÃ²å¼ş<br>
 
-npm install --save-dev extract-text-webpack-plugin
-ÔÚÅäÖÃÎÄ¼şµÄpluginsºóÒıÓÃËüÃÇ
+npm install --save-dev extract-text-webpack-plugin<br>
+ÔÚÅäÖÃÎÄ¼şµÄpluginsºóÒıÓÃËüÃÇ<br>
 
-// webpack.production.config.js
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// webpack.production.config.js<br>
+const webpack = require('webpack');<br>
+const HtmlWebpackPlugin = require('html-webpack-plugin');<br>
+const ExtractTextPlugin = require('extract-text-webpack-plugin');<br>
 
-module.exports = {
-    entry: __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş
-    output: {
-        path: __dirname + "/build",
-        filename: "bundle.js"
-    },
-    devtool: 'none',
-    devServer: {
-        contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼
-        historyApiFallback: true,//²»Ìø×ª
-        inline: true,
-        hot: true
-    },
-    module: {
-        rules: [
-            {
-                test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader"
-                    }, {
-                        loader: "css-loader",
-                        options: {
-                            modules: true
-                        }
-                    }, {
-                        loader: "postcss-loader"
-                    }
-                ]
-            }
-        ]
-    },
-    plugins: [
-        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),
-        new HtmlWebpackPlugin({
-            template: __dirname + "/app/index.tmpl.html"
-        }),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
-        new ExtractTextPlugin("style.css")
-    ],
-};
+module.exports = {<br>
+    entry: __dirname + "/app/main.js",//ÒÑ¶à´ÎÌá¼°µÄÎ¨Ò»Èë¿ÚÎÄ¼ş<br>
+    output: {<br>
+        path: __dirname + "/build",<br>
+        filename: "bundle.js"<br>
+    },<br>
+    devtool: 'none',<br>
+    devServer: {<br>
+        contentBase: "./public",//±¾µØ·şÎñÆ÷Ëù¼ÓÔØµÄÒ³ÃæËùÔÚµÄÄ¿Â¼<br>
+        historyApiFallback: true,//²»Ìø×ª<br>
+        inline: true,<br>
+        hot: true<br>
+    },<br>
+    module: {<br>
+        rules: [<br>
+            {<br>
+                test: /(\.jsx|\.js)$/, <br>
+                use: {<br>
+                    loader: "babel-loader"<br>
+                },<br>
+                exclude: /node_modules/<br>
+            },<br>
+            {<br>
+                test: /\.css$/,<br>
+                use: [<br>
+                    {<br>
+                        loader: "style-loader"<br>
+                    }, {<br>
+                        loader: "css-loader",<br>
+                        options: {<br>
+                            modules: true<br>
+                        }<br>
+                    }, {<br>
+                        loader: "postcss-loader"<br>
+                    }<br>
+                ]<br>
+            }<br>
+        ]<br>
+    },<br>
+    plugins: [<br>
+        new webpack.BannerPlugin('°æÈ¨ËùÓĞ£¬·­°æ±Ø¾¿'),<br>
+        new HtmlWebpackPlugin({<br>
+            template: __dirname + "/app/index.tmpl.html"<br>
+        }),<br>
+        new webpack.optimize.OccurrenceOrderPlugin(),<br>
+        new webpack.optimize.UglifyJsPlugin(),<br>
+        new ExtractTextPlugin("style.css")<br>
+    ],<br>
+};<br>
 ´ËÊ±Ö´ĞĞnpm run build¿ÉÒÔ¿´¼û´úÂëÊÇ±»Ñ¹ËõºóµÄ
 
 
@@ -981,18 +981,18 @@ module.exports = {
 
 webpack¿ÉÒÔ°ÑÒ»¸ö¹şÏ£ÖµÌí¼Óµ½´ò°üµÄÎÄ¼şÃûÖĞ£¬Ê¹ÓÃ·½·¨ÈçÏÂ,Ìí¼ÓÌØÊâµÄ×Ö·û´®»ìºÏÌå£¨[name], [id] and [hash]£©µ½Êä³öÎÄ¼şÃûÇ°
 
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');<br>
+const HtmlWebpackPlugin = require('html-webpack-plugin');<br>
+const ExtractTextPlugin = require('extract-text-webpack-plugin');<br>
 
-module.exports = {
-..
-    output: {
-        path: __dirname + "/build",
-        filename: "bundle-[hash].js"
-    },
-   ...
-};
+module.exports = {<br>
+..<br>
+    output: {<br>
+        path: __dirname + "/build", <br>
+        filename: "bundle-[hash].js" <br>
+    }, <br>
+   ... <br>
+}; <br>
 ÏÖÔÚÓÃ»§»áÓĞºÏÀíµÄ»º´æÁË¡£
 
 
